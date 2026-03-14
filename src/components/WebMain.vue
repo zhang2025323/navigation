@@ -116,7 +116,15 @@ export default {
           link: "https://www.netlify.com/",
           desc: "一个面向现代 Web 应用的一站式云开发与部署平台", 
         },
+        {
+          id: 14,
+          content: "Forvo",
+          link: "https://forvo.com/",
+          desc: "一个能够让你听到全世界各个国家，真人发音的网站", 
+        },
       ],
+
+      
 
       // 把weblist2放在同一个data返回对象里
       weblist2: [
@@ -203,6 +211,48 @@ export default {
           uname: "优优软件安装",
           link: "https://mp.weixin.qq.com/s/79MccblNTv8lTIvdDPJdLQ",
           desc: "官方原版 零病毒 零插件 无捆绑 免费下载",
+        },
+        {
+          id: 514,
+          uname: "星辰工具箱",
+          link: "https://tools.xcadmin.com/",
+          desc: "回归现实，发现有趣！~~",
+        },
+        {
+          id: 515,
+          uname: "Jitter",
+          link: "https://jitter.video/",
+          desc: "将你的LOGO变成动态效果的网站",
+        }, 
+        {
+          id: 516,
+          uname: "飞书 AI",
+          link: "https://www.feishu.cn/",
+          desc: "字节跳动旗下工作平台，让工作更简单",
+        }, 
+        {
+          id: 516,
+          uname: "美图设计室",
+          link: "https://www.designkit.cn/?channel=sllbd575&bd_vid=10322754193813292888",
+          desc: "一键生成你想要的图片",
+        }, 
+        {
+          id: 517,
+          uname: "墨刀",
+          link: "https://modao.cc/ad/aiprototype?utm_channel=SEM&utm_source=baidu&utm_medium=modao00&utm_term_space=JP-AI&utm_keyword=gemdesign&bd_vid=11077466852706140466",
+          desc: "AI生成可编辑原型图",
+        },
+        {
+          id: 518,
+          uname: "Tools.Dverso.io",
+          link: "https://pidoutv.com/sites/38557.html",
+          desc: "由 Dverso Studio 推出的 在线 AI 抠图与背景去除工具",
+        },
+        {
+          id: 519,
+          uname: "码上飞",
+          link: "https://www.codeflying.net/my-home",
+          desc: "用手机浏览器，就能生成一个带后台的小程序、APP和网站",
         },
       
       ],

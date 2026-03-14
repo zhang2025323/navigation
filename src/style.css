@@ -52,6 +52,10 @@
   text-align: center;
 }
 
+.N {
+  margin: auto;
+}
+
 .web {
   width: 120px;
   height: 50px;
@@ -60,7 +64,7 @@
   margin: 10px;
   background-color: #4c8e8c;
   font-size: 16px;
-  font-family: 微软雅黑;
+  font-family: 微软雅 黑;
   line-height: 50px;
   box-shadow: 6px 2px 6px;
   position: relative;
@@ -69,12 +73,13 @@
 
 .tooltip {
   position: absolute;
-  top: -30px;
   /* 显示在盒子上方 */
+  top: -10px;
+  bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
   padding: 5px 10px;
-  background: #333;
+  background: rgb(51, 51, 51, 0.9);
   color: #fff;
   font-size: 12px;
   border-radius: 4px;
@@ -86,6 +91,7 @@
   /* 隐藏不占空间 */
   transition: all 0.2s;
   /* 过渡动画 */
+  z-index: 1000;
 }
 
 /* 鼠标悬浮盒子时，显示tooltip */
