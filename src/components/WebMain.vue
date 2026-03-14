@@ -40,7 +40,7 @@ export default {
         },
         {
           id: 1,
-          content: "智慧职教",
+          content: "智慧职教+",
           link: "https://www.icve.com.cn/index",
           desc: "智慧职教官网",
         },
@@ -64,7 +64,7 @@ export default {
         },
         {
           id: 5,
-          content: "理工智慧+",
+          content: "理工智慧",
           link: "https://ipraclass.com/index/home",
           desc: "数字教育赋能人才培养，出版经验+技术积累+科研能力=理工智慧数字教材解决方案，助力建设高质量数字教材",
         },
@@ -122,9 +122,9 @@ export default {
       weblist2: [
         {
           id: 500,
-          uname: "助学网",
+          uname: "图欧学习导航",
           link: "https://a.zhuxuelo.top/index/chaxun",
-          desc: "网课“快速学习”的一个网站",
+          desc: "各种资源，等你去发现~",
         }, // 注意：id要唯一，这里改成20开始自增
         {
           id: 501,
