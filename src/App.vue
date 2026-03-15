@@ -6,7 +6,7 @@
     </audio>
         <!-- 第二个音频元素 -->
     <audio ref="audioPlayer2" loop>
-      <source src="@/assets/h3R3 - 我们之间.flac" type="audio/mpeg">
+      <source src="@/assets/我们之间.mp3" type="audio/mpeg">
     </audio>
 
     <!-- 添加音乐控制按钮 -->
