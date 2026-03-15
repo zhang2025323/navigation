@@ -4,7 +4,7 @@
       <div class="text">学习<img class="tu" src="~@/assets/icons/书.png"/>链接</div>
       <div class="N">
         <div class="web" v-for="item in weblist1" :key="item.id">
-          <a :href="item.link" target="_blank">
+          <a :href="item.link" target="_blank" class="web-a">
             <!-- 添加图标渲染 -->
             <img v-if="item.icon1" :src="item.icon1" class="web-icon" />
             {{ item.content }}
@@ -18,7 +18,7 @@
       <div class="text">其他<img class="tu" src="~@/assets/icons/gongju.png"/>工具</div>
       <div class="N">
         <div class="web" v-for="item in weblist2" :key="item.id">
-          <a :href="item.link" target="_blank">
+          <a :href="item.link" target="_blank" class="web-a">
             <!-- 添加图标渲染 -->
             <img v-if="item.icon2" :src="item.icon2" class="web-icon" />
             {{ item.uname }}
@@ -149,7 +149,7 @@ export default {
       weblist2: [
         {
           id: 500,
-          uname: "图欧学习导航",
+          uname: "图欧导航",
           link: "https://tuostudy.upnb.top/#term-360",
           desc: "各种资源，等你去发现~",
           icon2: new URL('@/assets/icons/tuou.png', import.meta.url).href,
@@ -191,7 +191,7 @@ export default {
         },
         {
           id: 506,
-          uname: "精品软件分享",
+          uname: "精品软件",
           link: "https://funxm.top/",
           desc: "提供各类精品的软件下载，无广告，页面简洁",
           icon2: new URL('@/assets/icons/xiazai.png', import.meta.url).href,
@@ -250,6 +250,7 @@ export default {
           uname: "星辰工具箱",
           link: "https://tools.xcadmin.com/",
           desc: "回归现实，发现有趣！~~",
+          icon2: new URL('@/assets/icons/xincheng.png', import.meta.url).href,
         },
         {
           id: 515,

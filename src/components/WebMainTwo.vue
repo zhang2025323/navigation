@@ -4,7 +4,7 @@
       <div class="text">66<img class="tu" src="~@/assets/icons/书.png"/>66</div>
       <div class="N">
         <div class="web" v-for="item in weblist1" :key="item.id">
-          <a :href="item.link" target="_blank">
+          <a :href="item.link" target="_blank" class="web-a">
             <!-- 添加图标渲染 -->
             <img v-if="item.icon1" :src="item.icon1" class="web-icon" />
             {{ item.content }}
@@ -18,10 +18,10 @@
       <div class="text">AI<img class="tu" src="~@/assets/icons/人工智能.png"/>链接</div>
       <div class="N">
         <div class="web" v-for="item in weblist2" :key="item.id">
-          <a :href="item.link" target="_blank">
+          <a :href="item.link" target="_blank" class="web-a">
             <!-- 添加图标渲染 -->
-            <img v-if="item.icon2" :src="item.icon2" class="web-icon" />
-            {{ item.uname }}
+              <img v-if="item.icon2" :src="item.icon2" class="web-icon" />
+              {{ item.uname }}
           </a>
           <!-- 悬浮信息：默认隐藏，hover时显示 -->
           <span class="tooltip">{{ item.desc }}</span>
@@ -92,7 +92,7 @@ export default {
         },
         {
           id: 518,
-          uname: "Tools.Dverso.io",
+          uname: "Tools",
           link: "https://pidoutv.com/sites/38557.html",
           desc: "由 Dverso Studio 推出的 在线 AI 抠图与背景去除工具",
           icon2: new URL('@/assets/icons/tools.png', import.meta.url).href,

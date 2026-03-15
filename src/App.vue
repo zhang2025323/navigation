@@ -50,14 +50,7 @@ export default {
       isPlaying2: false
     }
   },
-  mounted() {
-    // 尝试自动播放
-    this.$refs.audioPlayer.play().then(() => {
-      this.isPlaying1 = true;
-    }).catch(error => {
-      console.log("自动播放被阻止，需要用户交互:", error);
-    });
-  },
+  
   methods: {
     toggleMusic1() {
       if (this.isPlaying1) {
@@ -78,58 +71,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.App {
-  background-color: rgb(123, 0, 0);
-  margin: auto;
-  max-width: 100%;
-
-  overflow-x: hidden; /* 隐藏横向滚动条 */
-  min-height: 100vh; /* 确保页面至少占满整个视口高度 */
-  display: flex; /* 使用 Flex 布局 */
-  flex-direction: column; /* 垂直排列子元素 */
-}
-
-.WebMain {
-  flex: 1; /* 让主体部分占据剩余空间 */
-}
-
-/* 添加音乐控制按钮样式 */
-.music-control {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: rgb(123, 0, 0);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-.music-control:hover {
-  background-color: rgba(255, 255, 255, 1);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 第二个音乐控制按钮样式 */
-.music-control-2 {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: rgb(123, 0, 0);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-}
-</style>
