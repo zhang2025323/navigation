@@ -6,7 +6,7 @@
     </audio>
         <!-- 第二个音频元素 -->
     <audio ref="audioPlayer2" loop>
-      <source src="@/assets/封心.mp3" type="audio/mpeg">
+      <source src="@/assets/h3R3 - 我们之间.flac" type="audio/mpeg">
     </audio>
 
     <!-- 添加音乐控制按钮 -->
@@ -15,13 +15,15 @@
     </button>
     <!-- 第二个音乐控制按钮 -->
     <button @click="toggleMusic2" class="music-control-2">
-      {{ isPlaying2 ? '停止播放' : '封心' }}
+      {{ isPlaying2 ? '停止播放' : '我们之间' }}
     </button>
 
     <!-- 头部组件 -->
     <WebHeader></WebHeader>
     <!-- 主体组件 -->
     <WebMain></WebMain>
+    <!-- 主体组件2 -->
+    <WebMainTwo></WebMainTwo>
     <!-- 底部组件 -->
     <WebFooter></WebFooter>
   </div>
@@ -30,6 +32,7 @@
 <script>
 import WebHeader from "./components/WebHeader.vue";
 import WebMain from "./components/WebMain.vue";
+import WebMainTwo from "./components/WebMainTwo.vue";
 import WebFooter from "./components/WebFooter.vue";
 
 export default {
@@ -38,6 +41,7 @@ export default {
     WebHeader,
     WebMain,
     WebFooter,
+    WebMainTwo,
   },
 
   data() {

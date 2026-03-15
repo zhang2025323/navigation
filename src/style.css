@@ -26,19 +26,13 @@
   /* 水平居中 */
 }
 
-.type1 {
-  min-height: 460px;
-  color: black;
-  font-size: 10px;
-  background-color: rgb(144, 153, 107);
-}
-
-.type2 {
-  min-height: 460px;
+.type {
+  height: auto;
   color: black;
   font-size: 10px;
   background-color: rgb(144, 153, 107);
   margin-top: 10px;
+  width: 100%;
 }
 
 .tu {
@@ -57,8 +51,7 @@
   background-color: #e3ae1c;
   text-indent: 1em;
   text-align: center;
-
-
+  font-weight: 800;
 }
 
 .N {
@@ -71,10 +64,11 @@
 }
 
 .web {
-  width: 120px;
+  width: 160px;
   height: 50px;
-  border-radius: 10%;
+  /* border-radius: 50%; */
   text-align: center;
+  font-weight: 400;
   margin: 10px;
   background-color: #4c8e8c;
   font-size: 16px;
@@ -83,6 +77,13 @@
   box-shadow: 6px 2px 6px;
   position: relative;
   /* 让tooltip相对于盒子定位 */
+  transition: transform 0.3s ease;
+  /* 新增：添加过渡效果 */
+}
+
+.web:hover {
+  transform: translateY(-5px);
+  /* 新增：向上浮动 */
 }
 
 .tooltip {
@@ -114,6 +115,14 @@
   visibility: visible;
   top: -65px;
   /* 稍微上移一点，增加动画感 */
+}
+
+.web-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  margin-left: 2px;
+  vertical-align: middle;
 }
 
 /* 可选：加个小三角 */
@@ -148,6 +157,7 @@
   height: 210px;
   line-height: 60px;
   background-color: rgb(61, 64, 62);
+  margin-top: 10px;
 
 }
 
