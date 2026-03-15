@@ -1,7 +1,7 @@
 <template>
   <div class="App">
-    <!-- 添加第一个音频元素 -->
-    <audio ref="audioPlayer1" autoplay loop>
+    <!-- 添加第一个音频元素 autoplay属性是自动播放 -->
+    <audio ref="audioPlayer1" loop> 
       <source src="@/assets/anjin.mp3" type="audio/mpeg">
     </audio>
         <!-- 第二个音频元素 -->
@@ -50,14 +50,14 @@ export default {
       isPlaying2: false
     }
   },
-  mounted() {
-    // 尝试自动播放
-    this.$refs.audioPlayer.play().then(() => {
-      this.isPlaying1 = true;
-    }).catch(error => {
-      console.log("自动播放被阻止，需要用户交互:", error);
-    });
-  },
+  // mounted() {
+  //   // 尝试自动播放
+  //   this.$refs.audioPlayer1.play().then(() => {
+  //     this.isPlaying1 = true;
+  //   }).catch(error => {
+  //     console.log("自动播放被阻止，需要用户交互:", error);
+  //   });
+  // },
   methods: {
     toggleMusic1() {
       if (this.isPlaying1) {

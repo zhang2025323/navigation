@@ -1,7 +1,7 @@
 <template>
   <div class="web-main">
     <div class="type">
-      <div class="text">66<img class="tu" src="~@/assets/icons/书.png"/>66</div>
+      <div class="text">个人<img class="tu" src="~@/assets/icons/书.png"/>笔记</div>
       <div class="N">
         <div class="web" v-for="item in weblist1" :key="item.id">
           <a :href="item.link" target="_blank" class="web-a">
@@ -38,9 +38,9 @@ export default {
       weblist1: [
         {
           id: 0,
-          content: "待开发",
-          link: "#",
-          desc: "欢迎大家投稿",
+          content: "GitHub 部署",
+          link: "https://www.yuque.com/g/u54918272/pwefbc/bkzbwf6hz2fatg7g/collaborator/join?token=Ap5jxnkXDGxi4j97&source=doc_collaborator# 《Vue3 + Vite 项目部署至 GitHub Pages 全攻略》",
+          desc: "亲测有效的部署步骤",
         },
       ],
 
