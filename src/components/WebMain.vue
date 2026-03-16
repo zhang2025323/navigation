@@ -37,6 +37,13 @@ export default {
     return {
       weblist1: [
         {
+          id: 21,
+          content: "菜鸟学习",
+          link: "https://www.runoob.com/",
+          desc: "菜鸟教程-学的不仅是技术，更是梦想！",
+          icon1: new URL('@/assets/icons/cainiao.ico', import.meta.url).href,
+        },
+        {
           id: 20,
           content: "又拍云控制台",
           link: "https://console.upyun.com",
