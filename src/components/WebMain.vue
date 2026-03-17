@@ -166,7 +166,7 @@ export default {
           uname: "硬核网",
           link: "https://yinghezhinan.com/",
           desc: "够高清才是真硬核~~~",
-          icon2: new URL('@/assets/icons/tuou.png', import.meta.url).href,
+          icon2: new URL('@/assets/icons/yinghe.webp', import.meta.url).href,
         },
         {
           id: 500,
