@@ -37,6 +37,13 @@ export default {
     return {
       weblist1: [
         {
+          id: 16,
+          content: "软考",
+          link: "https://www.ruankao.org.cn/index.html",
+          desc: "计算机技术与软件专业技术资格考试",
+          icon1: new URL('@/assets/icons/ruankao.png', import.meta.url).href,
+        },
+        {
           id: 21,
           content: "菜鸟学习",
           link: "https://www.runoob.com/",
@@ -293,6 +300,13 @@ export default {
           link: "https://fc8.top/",
           desc: "免费软件下载站",
           icon2: new URL('@/assets/icons/fc8.svg', import.meta.url).href,
+        },
+        {
+          id: 517,
+          uname: "小皮面板",
+          link: "https://www.xp.cn/",
+          desc: "免费、安全、稳定、高效、易用的服务器管理面板",
+          icon2: new URL('@/assets/icons/xp.ico', import.meta.url).href,
         },
       ],
     };

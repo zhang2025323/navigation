@@ -167,7 +167,8 @@
   line-height: 60px;
   background-color: rgb(61, 64, 62);
   margin-top: 10px;
-
+  position: relative;
+  /* 新增，用于定位按钮 */
 }
 
 .web-footer1 {
@@ -182,6 +183,52 @@
   font-size: 14px;
   font-family: "微软雅黑";
   color: #fff;
+}
+
+/* 打赏按钮样式 */
+.reward-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #FFD700;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 收款码弹窗样式 */
+.reward-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.reward-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.Q {
+  width: 180px;
 }
 
 /* App 的样式*/

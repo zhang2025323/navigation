@@ -79,6 +79,13 @@ export default {
           icon2: new URL('@/assets/icons/qianwen.png', import.meta.url).href,
         }, 
         {
+          id: 522,
+          uname: "Kimi",
+          link: "https://www.kimi.com/zh/",
+          desc: "月之暗面研发的长文本 AI 智能助手",
+          icon2: new URL('@/assets/icons/kimi.ico', import.meta.url).href,
+        }, 
+        {
           id: 515,
           uname: "Jitter",
           link: "https://jitter.video/",
