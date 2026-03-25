@@ -1,7 +1,7 @@
 <template>
   <div class="web-main">
     <div class="type">
-      <div class="text">个人<img class="tu" src="~@/assets/icons/书.png"/>笔记</div>
+      <div class="text">个人<img class="tu" src="~@/assets/icons/书.webp"/>笔记</div>
       <div class="N">
         <div class="web" v-for="item in weblist1" :key="item.id">
           <a :href="item.link" target="_blank" class="web-a">
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="type">
-      <div class="text">AI<img class="tu" src="~@/assets/icons/人工智能.png"/>链接</div>
+      <div class="text">AI<img class="tu" src="~@/assets/icons/人工智能.webp"/>链接</div>
       <div class="N">
         <div class="web" v-for="item in weblist2" :key="item.id">
           <a :href="item.link" target="_blank" class="web-a">
@@ -41,7 +41,7 @@ export default {
           content: "GitHub部署",
           link: "https://www.yuque.com/g/u54918272/pwefbc/bkzbwf6hz2fatg7g/collaborator/join?token=Ap5jxnkXDGxi4j97&source=doc_collaborator# 《Vue3 + Vite 项目部署至 GitHub Pages 全攻略》",
           desc: "温馨提示:需要注册登陆后才能访问哦~",
-          icon1: new URL('@/assets/icons/wen.jpg', import.meta.url).href,
+          icon1: new URL('@/assets/icons/wen.webp', import.meta.url).href,
         },
 
       ],
@@ -55,14 +55,14 @@ export default {
           uname: "小布助手",
           link: "https://xiaobu.coloros.com/chat/",
           desc: " OPPO 推出的系统级 AI 智能助手",
-          icon2: new URL('@/assets/icons/xiaobu.png', import.meta.url).href,
+          icon2: new URL('@/assets/icons/xiaobu.webp', import.meta.url).href,
         }, 
         {
           id: 514,
           uname: "豆包",
           link: "https://www.doubao.com/chat/",
           desc: "豆包为你答疑解惑，提供灵感，辅助创作",
-          icon2: new URL('@/assets/icons/豆包.png', import.meta.url).href,
+          icon2: new URL('@/assets/icons/豆包.webp', import.meta.url).href,
         }, 
         {
           id: 520,
@@ -76,7 +76,7 @@ export default {
           uname: "千问",
           link: "https://tongyi.aliyun.com/qianwen/",
           desc: "阿里巴巴集团推出的AI助手",
-          icon2: new URL('@/assets/icons/qianwen.png', import.meta.url).href,
+          icon2: new URL('@/assets/icons/qianwen.webp', import.meta.url).href,
         }, 
         {
           id: 522,
@@ -90,7 +90,7 @@ export default {
           uname: "Jitter",
           link: "https://jitter.video/",
           desc: "将你的LOGO变成动态效果的网站",
-          icon2: new URL('@/assets/icons/jttr.png', import.meta.url).href,
+          icon2: new URL('@/assets/icons/jttr.webp', import.meta.url).href,
         }, 
         {
           id: 516,
@@ -118,7 +118,7 @@ export default {
           uname: "Tools",
           link: "https://pidoutv.com/sites/38557.html",
           desc: "由 Dverso Studio 推出的 在线 AI 抠图与背景去除工具",
-          icon2: new URL('@/assets/icons/tools.png', import.meta.url).href,
+          icon2: new URL('@/assets/icons/tools.webp', import.meta.url).href,
         },
         {
           id: 519,

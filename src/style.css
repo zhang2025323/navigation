@@ -194,9 +194,10 @@
 
 /* 打赏按钮样式 */
 .reward-btn {
-  position: absolute;
-  bottom: 90px;
-  right: 30px;
+  /* position: absolute; */
+  /* bottom: 90px;
+  right: 30px; */
+  margin: auto;
   padding: 10px 20px;
   background-color: #FFD700;
   color: white;

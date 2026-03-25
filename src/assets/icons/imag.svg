@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" fill="none">
+  <!-- 背景 -->
+  <rect width="128" height="128" rx="24" fill="url(#paint0_linear)" />
+  
+  <!-- 图像转换图标 -->
+  <g transform="translate(24, 24) scale(0.8)" fill="white">
+    <!-- 箭头 -->
+    <path d="M64 20L43 36V28H20V12H43V4L64 20Z" fill="white" />
+    <path d="M64 84L85 68V76H108V92H85V100L64 84Z" fill="white" />
+    
+    <!-- 图像图标 -->
+    <path fillRule="evenodd" clipRule="evenodd" d="M20 44C20 41.7909 21.7909 40 24 40H56C58.2091 40 60 41.7909 60 44V76C60 78.2091 58.2091 80 56 80H24C21.7909 80 20 78.2091 20 76V44ZM24 54H56V76H24V54ZM42 50C42 51.1046 41.1046 52 40 52C38.8954 52 38 51.1046 38 50C38 48.8954 38.8954 48 40 48C41.1046 48 42 48.8954 42 50Z" fill="white" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M68 44C68 41.7909 69.7909 40 72 40H104C106.209 40 108 41.7909 108 44V76C108 78.2091 106.209 80 104 80H72C69.7909 80 68 78.2091 68 76V44ZM72 68L80 60L88 68L96 60L104 68V76H72V68ZM88 52C88 53.1046 87.1046 54 86 54C84.8954 54 84 53.1046 84 52C84 50.8954 84.8954 50 86 50C87.1046 50 88 50.8954 88 52Z" fill="white" />
+  </g>
+  
+  <!-- 渐变定义 -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EC4899" />
+      <stop offset="1" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+</svg> 
