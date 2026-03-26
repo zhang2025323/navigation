@@ -38,12 +38,18 @@ export default {
       weblist1: [
         {
           id: 0,
-          content: "GitHub部署",
+          content: "Web 部署",
           link: "https://www.yuque.com/g/u54918272/pwefbc/bkzbwf6hz2fatg7g/collaborator/join?token=Ap5jxnkXDGxi4j97&source=doc_collaborator# 《Vue3 + Vite 项目部署至 GitHub Pages 全攻略》",
-          desc: "温馨提示:需要注册登陆后才能访问哦~",
+          desc: "成功部署案例",
           icon1: new URL('@/assets/icons/wen.webp', import.meta.url).href,
         },
-
+        {
+          id: 0,
+          content: "Java Web",
+          link: "https://www.yuque.com/g/u54918272/nyom83/fb15wevggf3e600x/collaborator/join?token=937VP6SM4RND1vDl&source=doc_collaborator# 《各种可能用到的笔记》",
+          desc: "成功部署案例",
+          icon1: new URL('@/assets/icons/wen.webp', import.meta.url).href,
+        },
       ],
 
       
@@ -113,21 +119,6 @@ export default {
           desc: "AI生成可编辑原型图",
           icon2: new URL('@/assets/icons/modao.ico', import.meta.url).href,
         },
-        {
-          id: 518,
-          uname: "Tools",
-          link: "https://pidoutv.com/sites/38557.html",
-          desc: "由 Dverso Studio 推出的 在线 AI 抠图与背景去除工具",
-          icon2: new URL('@/assets/icons/tools.webp', import.meta.url).href,
-        },
-        {
-          id: 519,
-          uname: "码上飞",
-          link: "https://www.codeflying.net/my-home",
-          desc: "用手机浏览器，就能生成一个带后台的小程序、APP和网站",
-          icon2: new URL('@/assets/icons/mashangfei.ico', import.meta.url).href,
-        },
-      
       ],
     };
   },
