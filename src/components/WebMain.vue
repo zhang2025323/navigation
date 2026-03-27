@@ -341,6 +341,21 @@ export default {
           desc: "文档类网站",
           icon2: new URL('@/assets/icons/yvque.webp', import.meta.url).href,
         },
+        {
+          id: 520,
+          uname: "在线抠图",
+          link: "https://zh.bgsub.com/pages/#/",
+          desc: "文档类网站",
+          icon2: new URL('@/assets/icons/kt.ico', import.meta.url).href,
+        },
+        {
+          id: 521,
+          uname: "TinyWow",
+          link: "https://www.tinywowcn.com/",
+          desc: "轻量型AI工具集合",
+          icon2: new URL('@/assets/icons/w.ico', import.meta.url).href,
+        },
+
       ],
     };
   },
