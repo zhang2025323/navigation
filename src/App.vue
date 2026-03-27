@@ -50,14 +50,14 @@ export default {
       isPlaying2: false
     }
   },
-  mounted() {
-    // 尝试自动播放
-    this.$refs.audioPlayer1.play().then(() => {
-      this.isPlaying1 = true;
-    }).catch(error => {
-      console.log("自动播放被阻止，需要用户交互:", error);
-    });
-  },
+  // mounted() {
+  //   // 尝试自动播放
+  //   this.$refs.audioPlayer1.play().then(() => {
+  //     this.isPlaying1 = true;
+  //   }).catch(error => {
+  //     console.log("自动播放被阻止，需要用户交互:", error);
+  //   });
+  // },
   methods: {
     toggleMusic1() {
       if (this.isPlaying1) {

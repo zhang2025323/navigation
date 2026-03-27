@@ -6,7 +6,7 @@
     <!-- 收款码弹窗 -->
     <div v-if="showReward" class="reward-modal" @click="hideReward">
       <div class="reward-modal-content" @click.stop>
-        <h3>感谢您的支持！</h3>
+        <h3>感谢您的支持</h3>
         <img class="Q" src="~@/assets/icons/wxzf.webp" alt="收款码">
       </div>
     </div>
