@@ -1,377 +1,191 @@
 <template>
   <div class="web-main">
-    <div class="type">
-      <div class="text">学习<img class="tu" src="~@/assets/icons/书.webp"/>链接</div>
-      <div class="N">
-        <div class="web" v-for="item in weblist1" :key="item.id">
-          <a :href="item.link" target="_blank" class="web-a">
-            <!-- 添加图标渲染 -->
-            <img v-if="item.icon1" :src="item.icon1" class="web-icon" />
-            {{ item.content }}
-          </a>
-          <!-- 悬浮信息：默认隐藏，hover时显示 -->
-          <span class="tooltip">{{ item.desc }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="type">
-      <div class="text">其他<img class="tu" src="~@/assets/icons/gongju.webp"/>链接</div>
-      <div class="N">
-        <div class="web" v-for="item in weblist2" :key="item.id">
-          <a :href="item.link" target="_blank" class="web-a">
-            <!-- 添加图标渲染 -->
-            <img v-if="item.icon2" :src="item.icon2" class="web-icon" />
-            {{ item.uname }}
-          </a>
-          <!-- 悬浮信息：默认隐藏，hover时显示 -->
-          <span class="tooltip">{{ item.desc }}</span>
-        </div>
-      </div>
+    <canvas ref="particleCanvas" class="particle-canvas"></canvas>
+    <div class="content">
+      <LinkCategory 
+        title="学习链接" 
+        :links="learningLinks" 
+        :icon="bookIcon" 
+      />
+      <LinkCategory 
+        title="其他链接" 
+        :links="otherLinks" 
+        :icon="toolIcon" 
+      />
     </div>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      weblist1: [
-        //计数：22
-        {
-          id: 1,
-          content: "软考",
-          link: "https://www.ruankao.org.cn/index.html",
-          desc: "计算机技术与软件专业技术资格考试",
-          icon1: new URL('@/assets/icons/ruankao.webp', import.meta.url).href,
-        },
-        {
-          id: 2,
-          content: "菜鸟学编程",
-          link: "https://www.runoob.com/",
-          desc: "菜鸟教程-学的不仅是技术，更是梦想！",
-          icon1: new URL('@/assets/icons/cainiao.ico', import.meta.url).href,
-        },
-        {
-          id: 5,
-          content: "W3编程",
-          link: "https://www.w3school.com.cn/",
-          desc: "编程相关学习资料",
-          icon1: new URL('@/assets/icons/3.webp', import.meta.url).href,
-        },
-        {
-          id: 3,
-          content: "鸿蒙MUI",
-          link: "https://mui.dcloud.net.cn/",
-          desc: "最接近原生APP体验的高性能前端框架模板",
-          icon1: new URL('@/assets/icons/MUI.webp', import.meta.url).href,
-        },
-        {
-          id: 22,
-          content: "鸿蒙文档",
-          link: "https://developer.huawei.com/consumer/cn/doc/",
-          desc: "鸿蒙官网",
-          icon1: new URL('@/assets/icons/huawei.webp', import.meta.url).href,
-        },
-        {
-          id: 4,
-          content: "SSM框架",
-          link: "https://www.wolai.com/v5Kuct5ZtPeVBk4NBUGBWF",
-          desc: "快速掌握：全新SSM+Spring Boot+MyBatis-Plus实战精讲",
-          icon1: new URL('@/assets/icons/spring.webp', import.meta.url).href,
-        },
-        
-        {
-          id: 6,
-          content: "ECharts",
-          link: "https://echarts.apache.org/zh/index.html",
-          desc: "ECharts数据可视化",
-          icon1: new URL('@/assets/icons/echarts.webp', import.meta.url).href,
-        },
-        {
-          id: 7,
-          content: "MQTT",
-          link: "https://www.mqtt.cn/",
-          desc: "MQTT协议中文站",
-          icon1: new URL('@/assets/icons/mqtt.webp', import.meta.url).href,
-        },
-        {
-          id: 23,
-          content: "Sa-Token",
-          link: "https://sa-token.cc/index.html",
-          desc: "MQTT协议中文站",
-          icon1: new URL('@/assets/icons/Sa.webp', import.meta.url).href,
-        },
-        {
-          id: 8,
-          content: "小黑题库",
-          link: "http://124.221.48.166/DuiHuanMaWeb/admin/allsofts.php",
-          desc: "提供各类考试题库资源&部分的软件下载试题",
-          icon1: new URL('@/assets/icons/xh.ico', import.meta.url).href,
-        },
-        {
-          id: 9,
-          content: "科德迪克斯",
-          link: "https://www.codedex.io/python",
-          desc: "国外的游戏开发网站", 
-          icon1: new URL('@/assets/icons/Learn.webp', import.meta.url).href,
-        },
-        {
-          id: 10,
-          content: "gitee",
-          link: "https://gitee.com/",
-          desc: "gitee官方网站,可以在上面协同开发",
-          icon1: new URL('@/assets/icons/G.ico', import.meta.url).href,
-        },
-        {
-          id: 11,
-          content: "GitHub",
-          link: "https://github.com/",
-          desc: "基于 Git 的代码托管与开发者协作平台",
-          icon1: new URL('@/assets/icons/GitHub.webp', import.meta.url).href,
-        },
-        {
-          id: 12,
-          content: "Netlify",
-          link: "https://www.netlify.com/",
-          desc: "面向现代 Web 应用的一站式云开发与部署平台", 
-          icon1: new URL('@/assets/icons/Push.svg', import.meta.url).href,
-        },
-        {
-          id: 13,
-          content: "又拍云",
-          link: "https://console.upyun.com",
-          desc: "管理云存储、CDN 加速等云服务的操作后台",
-          icon1: new URL('@/assets/icons/upyun.webp', import.meta.url).href,
-        },
-        {
-          id: 14,
-          content: "小皮面板",
-          link: "https://www.xp.cn/",
-          desc: "免费、安全、稳定、高效、易用的服务器管理面板",
-          icon1: new URL('@/assets/icons/xp.ico', import.meta.url).href,
-        },
-        {
-          id: 15,
-          content: "智慧职教+",
-          link: "https://www.icve.com.cn/index",
-          desc: "智慧职教官网",
-          icon1: new URL('@/assets/icons/zhihui.webp', import.meta.url).href,
-        },
-        {
-          id: 16,
-          content: "学习通",
-          link: "https://passport2.chaoxing.com/login?fid=12&refer=http%3A%2F%2Fi.chaoxing.com%2Fbase%3Ft%3D1748502859860&space=2",
-          desc: "学习通官网",
-          icon1: new URL('@/assets/icons/xuexitong.webp', import.meta.url).href,
-        },
-        {
-          id: 17,
-          content: "云机电官网",
-          link: "https://www.ynmec.edu.cn/",
-          desc: "云南机电职业技术学院官网",
-          icon1: new URL('@/assets/icons/yunjidian.webp', import.meta.url).href,
-        },
-        {
-          id: 18,
-          content: "全国职规赛",
-          link: "https://zgs.chsi.com.cn/home",
-          desc: "全国大学生职业规划大赛",
-          icon1: new URL('@/assets/icons/zhiye.webp', import.meta.url).href,
-        },
-        
-        {
-          id: 19,
-          content: "理工智慧",
-          link: "https://ipraclass.com/index/home",
-          desc: "理工智慧数字教材解决方案，助力建设高质量数字教材",
-          icon1: new URL('@/assets/icons/ligongzhihui.ico', import.meta.url).href,
-        },
-        {
-          id: 20,
-          content: "Forvo",
-          link: "https://forvo.com/",
-          desc: "让你听到全世界各个国家，真人发音的网站", 
-          icon1: new URL('@/assets/icons/Forvo.ico', import.meta.url).href,
-        },
-        {
-          id: 21,
-          content: "NEEA",
-          link: "https://www.neea.edu.cn/",
-          desc: "教育部教育考试院主办的官方平台", 
-          icon1: new URL('@/assets/icons/NEEA.webp', import.meta.url).href,
-        },
-      ],
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import { learningLinks, otherLinks } from '@/data/links.js'
+import LinkCategory from './LinkCategory.vue'
 
-      
+const bookIcon = new URL('@/assets/icons/书.webp', import.meta.url).href
+const toolIcon = new URL('@/assets/icons/gongju.webp', import.meta.url).href
 
-      // 把weblist2放在同一个data返回对象里
-      weblist2: [
-         {
-          id: 500,
-          uname: "硬核网",
-          link: "https://yinghezhinan.com/",
-          desc: "够高清才是真硬核~~~",
-          icon2: new URL('@/assets/icons/yh.webp', import.meta.url).href,
-        },
-        {
-          id: 501,
-          uname: "图欧导航",
-          link: "https://tuostudy.upnb.top/#term-360",
-          desc: "各种资源，等你去发现~",
-          icon2: new URL('@/assets/icons/tuou.webp', import.meta.url).href,
-        }, 
-        {
-          id: 502,
-          uname: "在线打字",
-          link: "http://www.daziba.cn/default.aspx",
-          desc: "练习打字的在线打字网站",
-          icon2: new URL('@/assets/icons/dazi.ico', import.meta.url).href,
-        },
-        {
-          id: 503,
-          uname: "素材资源",
-          link: "https://www.sucaizy.com/",
-          desc: "提供各类素材资源",
-          icon2: new URL('@/assets/icons/ziyuan.svg', import.meta.url).href,
-        },
-        
-        {
-          id: 504,
-          uname: "彼岸图网",
-          link: "https://pic.netbian.com/index_39.html",
-          desc: "背景图和壁纸查找",
-          icon2: new URL('@/assets/icons/4k.webp', import.meta.url).href,
-        },
-        {
-          id: 505,
-          uname: "良工绘图",
-          link: "https://www.lghuitu.com/",
-          desc: "制作 流程图、架构图、平面图、电路图和宣传册等",
-          icon2: new URL('@/assets/icons/lianggong.webp', import.meta.url).href,
-        },
-        {
-          id: 506,
-          uname: "绘图.oi",
-          link: "https://app.diagrams.net/",
-          desc: "面向团队的安全优先绘图工具",
-          icon2: new URL('@/assets/icons/er.webp', import.meta.url).href,
-        },
-        {
-          id: 522,
-          uname: "ProcessOn",
-          link: "https://www.processon.com/",
-          desc: "免费在线流程图思维导图",
-          icon2: new URL('@/assets/icons/on.webp', import.meta.url).href,
-        },
-        {
-          id: 507,
-          uname: "工具箱",
-          link: "https://tools.liumingye.cn/",
-          desc: "刘明野的工具箱-提供好用，易用的工具",
-          icon2: new URL('@/assets/icons/T.webp', import.meta.url).href,
-        },
-        {
-          id: 508,
-          uname: "星辰工具箱",
-          link: "https://tools.xcadmin.com/",
-          desc: "回归现实，发现有趣！~~",
-          icon2: new URL('@/assets/icons/xincheng.webp', import.meta.url).href,
-        },
-        {
-          id: 509,
-          uname: "软仓",
-          link: "https://softs.wandhi.com/#/",
-          desc: "资源分享平台",
-          icon2: new URL('@/assets/icons/R.webp', import.meta.url).href,
-        },
-        {
-          id: 510,
-          uname: "优优软件",
-          link: "https://mp.weixin.qq.com/s/79MccblNTv8lTIvdDPJdLQ",
-          desc: "官方原版 零病毒 零插件 无捆绑 免费下载",
-          icon2: new URL('@/assets/icons/NTI4MWU5.ico', import.meta.url).href,
-        },
-        {
-          id: 511,
-          uname: "精品软件",
-          link: "https://funxm.top/",
-          desc: "提供各类精品的软件下载，无广告，页面简洁",
-          icon2: new URL('@/assets/icons/xiazai.webp', import.meta.url).href,
-        },
-        {
-          id: 512,
-          uname: "FC8软件库",
-          link: "https://fc8.top/",
-          desc: "免费软件下载站",
-          icon2: new URL('@/assets/icons/fc8.svg', import.meta.url).href,
-        },
-        {
-          id: 513,
-          uname: "阿里图标",
-          link: "https://www.iconfont.cn",
-          desc: "阿里巴巴矢量图标库",
-          icon2: new URL('@/assets/icons/albb.webp', import.meta.url).href,
-        },
-        {
-          id: 514,
-          uname: "矢量图标",
-          link: "https://igoutu.cn/icons",
-          desc: "超过1万个图标，无论用于哪种都可以找到！",
-          icon2: new URL('@/assets/icons/shiliang.svg', import.meta.url).href,
-        },
-        
-        {
-          id: 515,
-          uname: "图片转换",
-          link: "https://imageconverters.org/zh",
-          desc: "免费的图片格式转换网站",
-          icon2: new URL('@/assets/icons/imag.svg', import.meta.url).href,
-        },
-        {
-          id: 516,
-          uname: "在线压缩",
-          link: "https://www.youcompress.com/zh-cn/",
-          desc: "文件有点大？试试在线压缩器！",
-          icon2: new URL('@/assets/icons/zxys.ico', import.meta.url).href,
-        },
-        {
-          id: 517,
-          uname: "在线转换",
-          link: "https://www.aconvert.com/cn/",
-          desc: "转换各类PDF文档,电子书,图像,图标等",
-          icon2: new URL('@/assets/icons/zaixian.ico', import.meta.url).href,
-        },
-        {
-          id: 518,
-          uname: "转换云",
-          link: "https://www.zhuanhuanyun.cn/?by=history&from=kkframenew",
-          desc: "在线转换音乐格式,每天有5个免费额度",
-          icon2: new URL('@/assets/icons/zhuanhuanyun.ico', import.meta.url).href,
-        },
-        {
-          id: 519,
-          uname: "语雀",
-          link: "https://www.yuque.com/login?goto=https%3A%2F%2Fwww.yuque.com%2Fdashboard",
-          desc: "文档类网站",
-          icon2: new URL('@/assets/icons/yvque.webp', import.meta.url).href,
-        },
-        {
-          id: 520,
-          uname: "在线抠图",
-          link: "https://zh.bgsub.com/pages/#/",
-          desc: "文档类网站",
-          icon2: new URL('@/assets/icons/kt.ico', import.meta.url).href,
-        },
-        {
-          id: 521,
-          uname: "TinyWow",
-          link: "https://www.tinywowcn.com/",
-          desc: "轻量型AI工具集合",
-          icon2: new URL('@/assets/icons/w.ico', import.meta.url).href,
-        },
+const particleCanvas = ref(null)
+let animationId = null
+let particles = []
+let ctx = null
 
-      ],
-    };
-  },
-};
+class Particle {
+  constructor(canvasWidth, canvasHeight) {
+    this.x = Math.random() * canvasWidth
+    this.y = Math.random() * canvasHeight
+    this.size = Math.random() * 4 + 1
+    this.speedX = (Math.random() - 0.5) * 1.5
+    this.speedY = (Math.random() - 0.5) * 1.5
+    this.opacity = Math.random() * 0.8 + 0.2
+    this.color = this.getRandomColor()
+  }
+
+  getRandomColor() {
+    const colors = [
+      'rgba(0, 255, 127, ',
+      'rgba(138, 43, 226, ',
+      'rgba(0, 128, 255, ',
+      'rgba(64, 224, 208, ',
+      'rgba(100, 149, 237, ',
+      'rgba(72, 209, 204, '
+    ]
+    return colors[Math.floor(Math.random() * colors.length)]
+  }
+
+  update(canvasWidth, canvasHeight) {
+    this.x += this.speedX
+    this.y += this.speedY
+
+    if (this.x > canvasWidth || this.x < 0) this.speedX = -this.speedX
+    if (this.y > canvasHeight || this.y < 0) this.speedY = -this.speedY
+  }
+
+  draw(context) {
+    context.beginPath()
+    context.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    context.fillStyle = this.color + this.opacity + ')'
+    context.shadowBlur = 15
+    context.shadowColor = this.color + '0.8)'
+    context.fill()
+    context.shadowBlur = 0
+  }
+}
+
+const initParticles = () => {
+  particles = []
+  const particleCount = 40
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle(particleCanvas.value.width, particleCanvas.value.height))
+  }
+}
+
+const connectParticles = () => {
+  const maxDistance = 100
+  for (let a = 0; a < particles.length; a++) {
+    for (let b = a; b < particles.length; b++) {
+      const dx = particles[a].x - particles[b].x
+      const dy = particles[a].y - particles[b].y
+      const distance = Math.sqrt(dx * dx + dy * dy)
+
+      if (distance < maxDistance) {
+        const opacity = 1 - distance / maxDistance
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(0, 255, 127, ${opacity * 0.3})`
+        ctx.lineWidth = 1
+        ctx.moveTo(particles[a].x, particles[a].y)
+        ctx.lineTo(particles[b].x, particles[b].y)
+        ctx.stroke()
+      }
+    }
+  }
+}
+
+const animate = () => {
+  ctx.clearRect(0, 0, particleCanvas.value.width, particleCanvas.value.height)
+
+  particles.forEach(particle => {
+    particle.update(particleCanvas.value.width, particleCanvas.value.height)
+    particle.draw(ctx)
+  })
+
+  connectParticles()
+  animationId = requestAnimationFrame(animate)
+}
+
+const resizeCanvas = () => {
+  const rect = particleCanvas.value.parentElement.getBoundingClientRect()
+  particleCanvas.value.width = rect.width
+  particleCanvas.value.height = rect.height
+}
+
+onMounted(() => {
+  ctx = particleCanvas.value.getContext('2d')
+  resizeCanvas()
+  initParticles()
+  animate()
+  window.addEventListener('resize', resizeCanvas)
+})
+
+onUnmounted(() => {
+  if (animationId) {
+    cancelAnimationFrame(animationId)
+  }
+  window.removeEventListener('resize', resizeCanvas)
+})
 </script>
+
+<style scoped>
+.web-main {
+  position: relative;
+  width: 100%;
+  height: auto;
+  padding: 15px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border-top: 2px solid rgba(0, 200, 100, 0.4);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.web-main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 200, 100, 0.3), transparent);
+  animation: scan 4s linear infinite;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.particle-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-top: -15px;
+}
+</style>
