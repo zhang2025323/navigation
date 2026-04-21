@@ -8,9 +8,10 @@
 - 📱 **响应式布局** - 完美适配移动端和PC端
 - 🎵 **背景音乐** - 两个纯音乐播放器，支持自动互斥
 - 🔗 **丰富的链接** - 包含AI工具、学习资源、实用工具等分类
-- 🎯 **悬浮提示** - 鼠标悬停显示链接详细信息
+- 🎯 **左侧导航栏** - 点击切换分类，右侧显示对应链接
 - 📐 **自适应高度** - 无限增加链接和组件都不会溢出
 - 🎪 **绿色主题** - 清新的绿色科技风格
+- 📱 **完美移动端** - 左侧导航→顶部横向标签栏，链接→单列卡片
 
 ## 🚀 快速开始
 
@@ -47,13 +48,11 @@ MyNavigating/
 ├── src/
 │   ├── assets/          # 静态资源（图标、音乐）
 │   ├── components/      # Vue组件
-│   │   ├── LinkCategory.vue   # 链接分类组件
-│   │   ├── WebHeader.vue      # 顶部标题栏
-│   │   ├── WebMain.vue        # 主内容区域1
-│   │   ├── WebMainTwo.vue     # 主内容区域2
-│   │   └── WebFooter.vue      # 页脚
+│   │   ├── MainLayout.vue      # 主布局（左侧导航+右侧内容）
+│   │   ├── WebHeader.vue       # 顶部标题栏
+│   │   └── WebFooter.vue       # 页脚
 │   ├── data/            # 数据文件
-│   │   └── links.js     # 链接数据
+│   │   └── links.js     # 链接数据（分类+链接）
 │   ├── App.vue          # 根组件
 │   ├── main.js          # 入口文件
 │   └── style.css        # 全局样式
@@ -66,24 +65,22 @@ MyNavigating/
 
 ### 在现有分类中添加链接
 
-编辑 `src/data/links.js`，在对应的链接数组中添加：
+编辑 `src/data/links.js`，在对应的分类 links 数组中添加：
 
 ```javascript
 {
-  name: '链接名称',
-  url: 'https://...',
-  description: '链接描述'
+  id: 1,                  // 唯一ID
+  title: '链接名称',
+  link: 'https://...',
+  desc: '链接描述',
+  icon: '图标地址'       // 可选
 }
 ```
 
 ### 创建新分类
 
-1. 在 `src/data/links.js` 中定义新的链接数组
-2. 在对应的WebMain组件中添加新的LinkCategory
-
-### 创建新的内容区域
-
-复制 `WebMain.vue` 或 `WebMainTwo.vue`，修改链接数据后在 `App.vue` 中引入即可。
+1. 在 `src/data/links.js` 的 categories 数组中添加新分类
+2. 新分类包含：id、name、icon、links（链接数组）
 
 ## 🛠️ 技术栈
 
@@ -94,7 +91,7 @@ MyNavigating/
 
 ## 📱 预览
 
-访问：[你的GitHub Pages地址]
+访问：https://zhang2025323.github.io/navigation/
 
 ## 👤 作者
 
