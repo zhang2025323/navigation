@@ -41,7 +41,7 @@
           rel="noopener noreferrer"
           class="link-card"
         >
-          <img v-if="link.icon" :src="link.icon" :alt="link.title" class="card-icon" />
+          <img v-if="link.icon" :src="link.icon" :alt="link.title" class="card-icon" loading="lazy" />
           <div v-else class="card-icon">🔗</div>
           <div class="card-content">
             <h3 class="card-title">{{ link.title }}</h3>

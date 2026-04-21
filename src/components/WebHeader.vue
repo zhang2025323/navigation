@@ -1,7 +1,7 @@
 <template>
   <div class="web-header">
-    <audio ref="audioPlayer1" loop :src="audioSrc1" type="audio/mpeg"></audio>
-    <audio ref="audioPlayer2" loop :src="audioSrc2" type="audio/mpeg"></audio>
+    <audio ref="audioPlayer1" loop preload="none" :src="audioSrc1" type="audio/mpeg"></audio>
+    <audio ref="audioPlayer2" loop preload="none" :src="audioSrc2" type="audio/mpeg"></audio>
     
     <button @click="toggleMusic(1)" class="music-btn music-btn-left">
       {{ isPlaying[1] ? '⏹️' : '🎵' }}
@@ -19,17 +19,35 @@
 
 <script setup>
 import { ref } from 'vue'
-import audioFile1 from '@/assets/wasted.mp3?url'
-import audioFile2 from '@/assets/Timeisbroken.mp3?url'
 
-const audioSrc1 = audioFile1
-const audioSrc2 = audioFile2
+// 使用动态导入，按需加载音频
+const audioSrc1 = ref('')
+const audioSrc2 = ref('')
+const audioLoaded = ref({ 1: false, 2: false })
 
 const audioPlayer1 = ref(null)
 const audioPlayer2 = ref(null)
 const isPlaying = ref({ 1: false, 2: false })
 
-const toggleMusic = (playerNum) => {
+// 懒加载音频函数
+const loadAudio = async (playerNum) => {
+  if (audioLoaded.value[playerNum]) return
+  
+  if (playerNum === 1 && !audioSrc1.value) {
+    const audioFile = await import('@/assets/wasted.mp3?url')
+    audioSrc1.value = audioFile.default
+  } else if (playerNum === 2 && !audioSrc2.value) {
+    const audioFile = await import('@/assets/Timeisbroken.mp3?url')
+    audioSrc2.value = audioFile.default
+  }
+  
+  audioLoaded.value[playerNum] = true
+}
+
+const toggleMusic = async (playerNum) => {
+  // 先懒加载音频
+  await loadAudio(playerNum)
+  
   if (isPlaying.value[playerNum]) {
     const player = playerNum === 1 ? audioPlayer1.value : audioPlayer2.value
     player.pause()
