@@ -17,14 +17,8 @@ export default defineConfig({
   build: {
     outDir: 'dist', // 打包输出目录，默认就是dist，可省略
     assetsDir: 'assets', // 静态资源目录
-    // 启用压缩
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true, // 移除 console
-        drop_debugger: true // 移除 debugger
-      }
-    },
+    // 使用默认的 esbuild 压缩（更快，不需要额外依赖）
+    minify: 'esbuild',
     // 代码分割配置
     rollupOptions: {
       output: {
