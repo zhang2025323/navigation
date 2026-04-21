@@ -42,7 +42,7 @@
             <h3 class="card-title">{{ link.title }}</h3>
             <p class="card-desc">{{ link.desc }}</p>
           </div>
-          <div class="card-arrow">→</div>
+          <div class="card-arrow">➜</div>
         </a>
       </div>
 
@@ -91,7 +91,7 @@ const switchCategory = (id) => {
 }
 
 .sidebar-header {
-  padding: 24px 20px;
+  padding: 20px 20px;
   border-bottom: 1px solid rgba(0, 200, 100, 0.2);
   flex-shrink: 0;
 }
@@ -107,6 +107,28 @@ const switchCategory = (id) => {
   flex: 1;
   padding: 12px 0;
   overflow-y: auto;
+  /* iOS平滑滚动 */
+  -webkit-overflow-scrolling: touch;
+  /* 滚动时显示滚动条提示 */
+  position: relative;
+}
+
+/* 导航列表滚动条美化 */
+.nav-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nav-list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.nav-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 200, 100, 0.3);
+  border-radius: 3px;
+}
+
+.nav-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 200, 100, 0.5);
 }
 
 .nav-item {
@@ -206,7 +228,7 @@ const switchCategory = (id) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 200, 100, 0.1);
+  background: #ffffff;
   border-radius: 10px;
   object-fit: contain;
   padding: 4px;
@@ -239,14 +261,18 @@ const switchCategory = (id) => {
 }
 
 .card-arrow {
-  color: rgba(0, 200, 100, 0.5);
-  font-size: 18px;
+  color: rgba(0, 200, 100, 0.4);
+  font-size: 20px;
   transition: all 0.3s ease;
+  font-weight: bold;
+  transform: translateX(0);
+  line-height: 1;
 }
 
 .link-card:hover .card-arrow {
   color: #00ff7f;
-  transform: translateX(4px);
+  transform: translateX(6px);
+  text-shadow: 0 0 10px rgba(0, 255, 127, 0.5);
 }
 
 /* 空状态 */
@@ -266,24 +292,20 @@ const switchCategory = (id) => {
   margin: 0;
 }
 
-/* 滚动条美化 */
-.nav-list::-webkit-scrollbar,
+/* 右侧内容区滚动条 */
 .content-area::-webkit-scrollbar {
   width: 6px;
 }
 
-.nav-list::-webkit-scrollbar-track,
 .content-area::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.1);
 }
 
-.nav-list::-webkit-scrollbar-thumb,
 .content-area::-webkit-scrollbar-thumb {
   background: rgba(0, 200, 100, 0.3);
   border-radius: 3px;
 }
 
-.nav-list::-webkit-scrollbar-thumb:hover,
 .content-area::-webkit-scrollbar-thumb:hover {
   background: rgba(0, 200, 100, 0.5);
 }
