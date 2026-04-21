@@ -11,8 +11,7 @@
     </button>
 
     <WebHeader />
-    <WebMain />
-    <WebMainTwo />
+    <MainLayout />
     <WebFooter />
   </div>
 </template>
@@ -20,8 +19,7 @@
 <script setup>
 import { ref } from 'vue'
 import WebHeader from './components/WebHeader.vue'
-import WebMain from './components/WebMain.vue'
-import WebMainTwo from './components/WebMainTwo.vue'
+import MainLayout from './components/MainLayout.vue'
 import WebFooter from './components/WebFooter.vue'
 
 const audioSrc1 = new URL('@/assets/wasted.mp3', import.meta.url).href
@@ -55,9 +53,7 @@ const toggleMusic = (playerNum) => {
   max-width: 100%;
   width: 100%;
   overflow-x: hidden;
-  overflow-y: visible;
-  height: auto;
-  min-height: 100vh;
+  height: 100vh; /* 固定高度 */
   display: flex;
   flex-direction: column;
   position: relative;

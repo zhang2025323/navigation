@@ -138,4 +138,39 @@ onUnmounted(() => {
   border-radius: 5px;
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 }
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .web-footer {
+    padding: 10px 0;
+  }
+  
+  .tu1 {
+    height: 30px;
+    margin-left: 5px;
+  }
+  
+  .web-footer1 {
+    font-size: 14px;
+  }
+  
+  .web-footer2 {
+    font-size: 12px;
+    height: auto;
+  }
+  
+  .reward-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  .reward-modal-content {
+    margin: 20px;
+    padding: 15px;
+  }
+  
+  .Q {
+    width: 160px;
+  }
+}
 </style>

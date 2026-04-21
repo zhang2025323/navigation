@@ -86,4 +86,17 @@
     background-position: 200% 50%;
   }
 }
+
+/* 响应式优化 */
+@media (max-width: 768px) {
+  .web-header {
+    height: 45px;
+    line-height: 45px;
+    font-size: 18px;
+  }
+  
+  .glow-text {
+    letter-spacing: 1.5px;
+  }
+}
 </style>
