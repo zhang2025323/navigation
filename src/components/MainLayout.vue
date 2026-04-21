@@ -1,16 +1,11 @@
 <template>
-  <div 
-    class="main-layout"
-    @touchstart="handleTouchStart"
-    @touchmove="handleTouchMove"
-    @touchend="handleTouchEnd"
-  >
+  <div class="main-layout">
     <!-- 左侧导航栏 -->
     <aside class="sidebar">
       <div class="sidebar-header">
         <h2>📋 导航分类</h2>
       </div>
-      <nav class="nav-list">
+      <nav class="nav-list" ref="navListRef">
         <div
           v-for="cat in categories"
           :key="cat.id"
@@ -26,7 +21,12 @@
     </aside>
 
     <!-- 右侧链接内容（可滚动） -->
-    <main class="content-area">
+    <main 
+      class="content-area"
+      @touchstart="handleTouchStart"
+      @touchmove="handleTouchMove"
+      @touchend="handleTouchEnd"
+    >
       <div class="content-header">
         <h1>{{ currentCategory?.icon }} {{ currentCategory?.name }}</h1>
         <p class="category-desc">共 {{ currentCategory?.links?.length || 0 }} 个链接</p>
@@ -56,20 +56,16 @@
         <p>该分类下暂无链接</p>
       </div>
     </main>
-
-    <!-- 滑动指示器 -->
-    <div class="swipe-indicator" v-if="isMobile">
-      <span class="swipe-hint">← 左右滑动切换分类 →</span>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import categories from '../data/links.js'
 
 const activeCategory = ref(categories[0].id)
 const isMobile = ref(false)
+const navListRef = ref(null)
 
 // 触摸状态
 let touchStartX = 0
@@ -130,6 +126,28 @@ const checkMobile = () => {
   isMobile.value = window.innerWidth <= 900
 }
 
+// 滚动到当前激活的分类
+const scrollToActiveCategory = () => {
+  nextTick(() => {
+    if (!navListRef.value) return
+
+    const activeElement = navListRef.value.querySelector('.nav-item.active')
+    if (activeElement) {
+      // 滚动到当前激活的分类，让它可见
+      activeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      })
+    }
+  })
+}
+
+// 监听当前分类变化，滚动左侧导航栏
+watch(activeCategory, () => {
+  scrollToActiveCategory()
+})
+
 onMounted(() => {
   checkMobile()
   window.addEventListener('resize', checkMobile)
@@ -147,35 +165,6 @@ onUnmounted(() => {
   min-height: 0; /* 重要：防止Flex子项溢出 */
   background: transparent;
   position: relative;
-}
-
-/* 滑动指示器 */
-.swipe-indicator {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 200, 100, 0.15);
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: 1px solid rgba(0, 200, 100, 0.3);
-  z-index: 50;
-  animation: fadeInOut 3s ease-in-out infinite;
-}
-
-.swipe-hint {
-  color: #00ff7f;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-@keyframes fadeInOut {
-  0%, 100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
 }
 
 /* 左侧导航栏 */
