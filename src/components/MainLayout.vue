@@ -1,5 +1,10 @@
 <template>
-  <div class="main-layout">
+  <div 
+    class="main-layout"
+    @touchstart="handleTouchStart"
+    @touchmove="handleTouchMove"
+    @touchend="handleTouchEnd"
+  >
     <!-- 左侧导航栏 -->
     <aside class="sidebar">
       <div class="sidebar-header">
@@ -51,14 +56,24 @@
         <p>该分类下暂无链接</p>
       </div>
     </main>
+
+    <!-- 滑动指示器 -->
+    <div class="swipe-indicator" v-if="isMobile">
+      <span class="swipe-hint">← 左右滑动切换分类 →</span>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 import categories from '../data/links.js'
 
 const activeCategory = ref(categories[0].id)
+const isMobile = ref(false)
+
+// 触摸状态
+let touchStartX = 0
+let touchEndX = 0
 
 const currentCategory = computed(() => {
   return categories.find(cat => cat.id === activeCategory.value)
@@ -67,6 +82,62 @@ const currentCategory = computed(() => {
 const switchCategory = (id) => {
   activeCategory.value = id
 }
+
+// 切换到上一个分类
+const switchToPrevCategory = () => {
+  const currentIndex = categories.findIndex(cat => cat.id === activeCategory.value)
+  if (currentIndex > 0) {
+    activeCategory.value = categories[currentIndex - 1].id
+  }
+}
+
+// 切换到下一个分类
+const switchToNextCategory = () => {
+  const currentIndex = categories.findIndex(cat => cat.id === activeCategory.value)
+  if (currentIndex < categories.length - 1) {
+    activeCategory.value = categories[currentIndex + 1].id
+  }
+}
+
+// 触摸开始
+const handleTouchStart = (e) => {
+  touchStartX = e.changedTouches[0].screenX
+}
+
+// 触摸移动
+const handleTouchMove = (e) => {
+  touchEndX = e.changedTouches[0].screenX
+}
+
+// 触摸结束，判断滑动方向
+const handleTouchEnd = () => {
+  const swipeThreshold = 50 // 滑动阈值，避免误触
+  const diff = touchStartX - touchEndX
+
+  if (Math.abs(diff) < swipeThreshold) return // 滑动距离太短，不执行
+
+  if (diff > 0) {
+    // 向左滑动 -> 下一个分类
+    switchToNextCategory()
+  } else {
+    // 向右滑动 -> 上一个分类
+    switchToPrevCategory()
+  }
+}
+
+// 检测是否为移动端
+const checkMobile = () => {
+  isMobile.value = window.innerWidth <= 900
+}
+
+onMounted(() => {
+  checkMobile()
+  window.addEventListener('resize', checkMobile)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkMobile)
+})
 </script>
 
 <style scoped>
@@ -75,6 +146,36 @@ const switchCategory = (id) => {
   flex: 1; /* 让它占满剩余空间 */
   min-height: 0; /* 重要：防止Flex子项溢出 */
   background: transparent;
+  position: relative;
+}
+
+/* 滑动指示器 */
+.swipe-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 200, 100, 0.15);
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 200, 100, 0.3);
+  z-index: 50;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+.swipe-hint {
+  color: #00ff7f;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 /* 左侧导航栏 */
