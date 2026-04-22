@@ -70,6 +70,7 @@ const navListRef = ref(null)
 // 触摸状态
 let touchStartX = 0
 let touchEndX = 0
+let hasMoved = false // 标记是否发生了滑动
 
 const currentCategory = computed(() => {
   return categories.find(cat => cat.id === activeCategory.value)
@@ -98,15 +99,24 @@ const switchToNextCategory = () => {
 // 触摸开始
 const handleTouchStart = (e) => {
   touchStartX = e.changedTouches[0].screenX
+  touchEndX = touchStartX // 初始化结束位置
+  hasMoved = false // 重置滑动标记
 }
 
 // 触摸移动
 const handleTouchMove = (e) => {
   touchEndX = e.changedTouches[0].screenX
+  // 只有当移动距离超过一定值时才标记为滑动
+  if (Math.abs(touchStartX - touchEndX) > 10) {
+    hasMoved = true
+  }
 }
 
 // 触摸结束，判断滑动方向
 const handleTouchEnd = () => {
+  // 如果没有发生滑动，直接返回
+  if (!hasMoved) return
+
   const swipeThreshold = 50 // 滑动阈值，避免误触
   const diff = touchStartX - touchEndX
 
