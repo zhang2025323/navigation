@@ -174,8 +174,7 @@ onUnmounted(() => {
 /* 响应式优化 */
 @media (max-width: 768px) {
   .web-footer {
-    padding: 15px 15px;
-    gap: 10px;
+    display: none;
   }
 
   .footer-top {
