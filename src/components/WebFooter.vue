@@ -52,7 +52,7 @@ onUnmounted(() => {
 <style scoped>
 .web-footer {
   height: auto;
-  padding: 15px 0;
+  padding: 30px 20px;
   background: linear-gradient(180deg, rgba(0, 255, 255, 0.12), rgba(138, 43, 226, 0.1));
   border-top: 2px solid rgba(0, 255, 255, 0.35);
   margin-top: 10px;
@@ -60,13 +60,16 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 18px;
 }
 
 .tu1 {
-  height: 40px;
+  height: 36px;
   width: auto;
-  margin-left: 10px;
+  margin-right: 10px;
   filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.5));
+  vertical-align: middle;
 }
 
 .web-footer1 {
@@ -74,34 +77,41 @@ onUnmounted(() => {
   font-family: "微软雅黑";
   color: #ffffff;
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .web-footer2 {
-  height: 20px;
   text-align: center;
   font-size: 14px;
   font-family: "微软雅黑";
   color: #ffffff;
   text-shadow: 0 0 5px rgba(0, 255, 255, 0.35);
+  margin: 0;
+  line-height: 1.6;
 }
 
 .reward-btn {
-  margin: auto;
-  padding: 10px 20px;
+  margin: 5px 0;
+  padding: 12px 28px;
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.25), rgba(138, 43, 226, 0.2));
   color: #00ffff;
   border: 1px solid rgba(0, 255, 255, 0.5);
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
   backdrop-filter: blur(5px);
+  font-size: 15px;
 }
 
 .reward-btn:hover {
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.35), rgba(138, 43, 226, 0.3));
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.45);
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
 .reward-modal {
@@ -142,12 +152,13 @@ onUnmounted(() => {
 /* 响应式优化 */
 @media (max-width: 768px) {
   .web-footer {
-    padding: 10px 0;
+    padding: 20px 15px;
+    gap: 15px;
   }
   
   .tu1 {
     height: 30px;
-    margin-left: 5px;
+    margin-right: 8px;
   }
   
   .web-footer1 {
@@ -156,11 +167,11 @@ onUnmounted(() => {
   
   .web-footer2 {
     font-size: 12px;
-    height: auto;
+    line-height: 1.5;
   }
   
   .reward-btn {
-    padding: 8px 16px;
+    padding: 10px 22px;
     font-size: 14px;
   }
   
