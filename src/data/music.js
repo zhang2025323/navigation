@@ -1,4 +1,5 @@
 import aiyaaiyaLrc from '../assets/lyrics/BY2-爱丫爱丫.lrc?raw'
+import yfLrc from '../assets/lyrics/玉芬-你像风一样出现.lrc?raw'
 
 export const musicList = [
   {
@@ -24,6 +25,14 @@ export const musicList = [
     cover: new URL('../assets/images/aiyaiy.jpg', import.meta.url).href,
     audio: new URL('../assets/爱丫爱丫-BY2.mp3', import.meta.url).href,
     lyrics: aiyaaiyaLrc
+  },
+  {
+    id: 4,
+    title: '你像风一样出现',
+    artist: '玉芬',
+    cover: new URL('../assets/images/yf.jpg', import.meta.url).href,
+    audio: new URL('../assets/玉芬-你像风一样出现.mp3', import.meta.url).href,
+    lyrics: yfLrc
   }
 ]
 
