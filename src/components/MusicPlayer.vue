@@ -759,9 +759,10 @@ const seekTo = (e) => {
 }
 
 .song-list {
-  max-height: 60vh;
+  max-height: 330px;
   overflow-y: auto;
   padding: 8px 0;
+  scroll-behavior: smooth;
 }
 
 .song-list::-webkit-scrollbar {
@@ -769,19 +770,24 @@ const seekTo = (e) => {
 }
 
 .song-list::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
 }
 
 .song-list::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 255, 0.25);
+  background: rgba(0, 255, 255, 0.3);
   border-radius: 2px;
+}
+
+.song-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 255, 255, 0.5);
 }
 
 .song-item {
   display: flex;
   align-items: center;
   gap: 15px;
-  padding: 14px 28px;
+  padding: 12px 24px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -946,7 +952,7 @@ const seekTo = (e) => {
   }
 
   .song-list {
-    max-height: 55vh;
+    max-height: 280px;
   }
 }
 

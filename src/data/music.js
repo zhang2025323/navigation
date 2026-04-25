@@ -2,7 +2,41 @@ import aiyaaiyaLrc from '../assets/lyrics/BY2-爱丫爱丫.lrc'
 import yfLrc from '../assets/lyrics/玉芬-你像风一样出现.lrc'
 import jcxLrc from '../assets/lyrics/江辰-锈.lrc'
 
+
+
 export const musicList = [
+  {
+    id: 9,
+    title: 'Apparition (Instrumental)',
+    artist: 'Tony Anderson',
+    cover: new URL('../assets/images/a.jpg', import.meta.url).href,
+    audio: new URL('../assets/Tony Anderson - Apparition (Instrumental).mp3', import.meta.url).href,
+    lyrics: '[00:05.00]纯音乐，请欣赏',
+  },
+  {
+    id: 8,
+    title: '还是会想你',
+    artist: '林达浪/h3R3',
+    cover: new URL('../assets/images/hshxn.jpg', import.meta.url).href,
+    audio: new URL('../assets/还是会想你.mp3', import.meta.url).href,
+    lyrics: '[00:05.00]暂无歌词，请欣赏\n[00:10.00]还是会想你',
+  },
+  {
+    id: 7,
+    title: '每当我',
+    artist: '刘诗人',
+    cover: new URL('../assets/images/mdw.jpg', import.meta.url).href,
+    audio: new URL('../assets/每当我.mp3', import.meta.url).href,
+    lyrics: '[00:05.00]暂无歌词，请欣赏\n[00:10.00]如果当时勇敢一点\n[00:15.00]现在的结局会不会被改写？',
+  },
+  {
+    id: 6,
+    title: '新的心跳',
+    artist: 'Cover G.E.M.邓紫棋',
+    cover: new URL('../assets/images/xdxt.jpg', import.meta.url).href,
+    audio: new URL('../assets/新的心跳.mp3', import.meta.url).href,
+    lyrics: '[00:00.00]暂无歌词，请欣赏',
+  },
   {
     id: 5,
     title: '绣',
@@ -33,7 +67,7 @@ export const musicList = [
     artist: 'ks泳',
     cover: new URL('../assets/images/time.jpg', import.meta.url).href,
     audio: new URL('../assets/Timeisbroken.mp3', import.meta.url).href,
-    lyrics: '[00:00.00]歌名：时光若易碎瓷(Time is Broken)\n[00:02.00]歌手：ks泳\n[00:05.00]纯音乐，请欣赏\n'
+    lyrics: '[00:00.00]纯音乐，请欣赏\n'
   },
   {
     id: 1,
@@ -41,7 +75,7 @@ export const musicList = [
     artist: 'huken&Murkish&harmony',
     cover: new URL('../assets/images/w.jpg', import.meta.url).href,
     audio: new URL('../assets/wasted.mp3', import.meta.url).href,
-    lyrics: '[00:00.00]歌名：Wasted\n[00:02.00]歌手：huken&Murkish&harmony\n[00:05.00]纯音乐，请欣赏\n'
+    lyrics: '[00:00.00]纯音乐，请欣赏\n'
   },
 ]
 
