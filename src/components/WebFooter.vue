@@ -2,7 +2,7 @@
   <div class="web-footer">
     <div class="footer-top">
       <p class="web-footer1">
-        <img class="tu1" src="~@/assets/icons/icons8-邮箱与信-100.webp" alt="email icon" />
+        <img class="tu1" :src="emailIcon" alt="email icon" />
         联系邮箱：2419771662@qq.com
       </p>
       <button class="reward-btn" @click="showReward = true">请我吃包辣条</button>
@@ -10,7 +10,7 @@
     <div v-if="showReward" class="reward-modal" @click="hideReward">
       <div class="reward-modal-content" @click.stop>
         <h3>感谢您的支持</h3>
-        <img class="Q" src="~@/assets/icons/wxzf.webp" alt="收款码" />
+        <img class="Q" :src="rewardIcon" alt="收款码" />
       </div>
     </div>
     <div class="footer-bottom">
@@ -25,6 +25,8 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const showReward = ref(false)
+const emailIcon = new URL('../assets/icons/icons8-邮箱与信-100.webp', import.meta.url).href
+const rewardIcon = new URL('../assets/icons/wxzf.webp', import.meta.url).href
 const currentTime = ref('')
 const currentYear = ref(new Date().getFullYear())
 let timer = null
