@@ -12,12 +12,12 @@
       </div>
 
       <div class="lyrics-section">
-        <div class="lyrics-container" ref="lyricsContainer">
+        <div class="lyrics-container">
           <div 
-            v-for="(line, index) in parsedLyrics" 
+            v-for="(line, index) in visibleLyrics" 
             :key="index"
             class="lyric-line"
-            :class="{ active: currentLyricIndex === index }"
+            :class="{ active: line.isActive }"
           >
             {{ line.text }}
           </div>
@@ -133,7 +133,6 @@ import { ref, computed, nextTick, watch } from 'vue'
 import { musicList } from '../data/music'
 
 const audioRef = ref(null)
-const lyricsContainer = ref(null)
 const currentIndex = ref(0)
 const isPlaying = ref(false)
 const currentTime = ref(0)
@@ -173,6 +172,34 @@ const parsedLyrics = computed(() => {
   return result
 })
 
+// 可见歌词 - 只显示当前行附近的歌词（窗口效果）
+const visibleLyrics = computed(() => {
+  if (parsedLyrics.value.length === 0) return []
+  
+  const totalLines = parsedLyrics.value.length
+  const currentLine = currentLyricIndex.value
+  
+  // 显示范围：当前行前后各2行（共5行）
+  const range = 2
+  let start = Math.max(0, currentLine - range)
+  let end = Math.min(totalLines, currentLine + range + 1)
+  
+  // 如果歌词太少，确保至少显示5行或全部
+  if (end - start < 5 && totalLines >= 5) {
+    if (start === 0) {
+      end = Math.min(totalLines, start + 5)
+    } else if (end === totalLines) {
+      start = Math.max(0, end - 5)
+    }
+  }
+  
+  // 返回可见的歌词，并标记哪一行是当前高亮行
+  return parsedLyrics.value.slice(start, end).map((line, index) => ({
+    ...line,
+    isActive: (start + index) === currentLine
+  }))
+})
+
 // 格式化时间
 const formatTime = (time) => {
   if (!time) return '0:00'
@@ -185,9 +212,6 @@ const formatTime = (time) => {
 const resetLyricPosition = () => {
   currentLyricIndex.value = 0
   currentTime.value = 0
-  if (lyricsContainer.value) {
-    lyricsContainer.value.scrollTop = 0
-  }
 }
 
 // 监听歌曲切换，重置歌词位置
@@ -211,6 +235,30 @@ const updateTime = () => {
         }
       }
       currentLyricIndex.value = index
+      
+      // 滚动歌词到当前行
+      scrollToLyric(index)
+    }
+  }
+}
+
+// 滚动歌词
+const scrollToLyric = (index) => {
+  if (lyricsContainer.value) {
+    const lyricLine = lyricsContainer.value.children[index]
+    if (lyricLine) {
+      const containerHeight = lyricsContainer.value.clientHeight
+      const lineTop = lyricLine.offsetTop
+      const lineHeight = lyricLine.clientHeight
+      const scrollTop = lineTop - containerHeight / 2 + lineHeight / 2
+      
+      // 使用 requestAnimationFrame 优化滚动
+      requestAnimationFrame(() => {
+        lyricsContainer.value.scrollTo({
+          top: scrollTop,
+          behavior: 'smooth'
+        })
+      })
     }
   }
 }
@@ -433,51 +481,58 @@ const seekTo = (e) => {
   align-items: center;
   justify-content: center;
   min-width: 0;
+  overflow: hidden;
 }
 
 .lyrics-container {
   width: 100%;
   height: 100%;
   max-height: 400px;
-  overflow-y: hidden;
+  overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
+  gap: 8px;
+}
+
+.lyrics-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.lyrics-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lyrics-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 255, 255, 0.3);
+  border-radius: 2px;
 }
 
 .lyric-line {
   text-align: center;
-  color: rgba(255, 255, 255, 0.35);
-  font-size: 15px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 16px;
   line-height: 1.6;
-  padding: 5px 0;
+  padding: 4px 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  letter-spacing: 0.3px;
-  opacity: 0.45;
+  letter-spacing: 0.5px;
+  opacity: 0.5;
   white-space: nowrap;
 }
 
 .lyric-line.active {
   color: #00ffff;
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 600;
   text-shadow: 
-    0 0 20px rgba(0, 255, 255, 0.9),
-    0 0 40px rgba(0, 255, 255, 0.5),
-    0 0 60px rgba(0, 255, 255, 0.3);
+    0 0 25px rgba(0, 255, 255, 1),
+    0 0 50px rgba(0, 255, 255, 0.5),
+    0 0 75px rgba(0, 255, 255, 0.3);
   opacity: 1;
-  transform: scale(1.05);
-}
-
-/* 高亮行前后几行的渐变效果 */
-.lyric-line.active + .lyric-line,
-.lyric-line.active + .lyric-line + .lyric-line {
-  opacity: 0.7;
-  color: rgba(255, 255, 255, 0.55);
+  transform: scale(1.08);
 }
 
 /* 控制区域 */
@@ -833,19 +888,20 @@ const seekTo = (e) => {
   }
 
   .lyrics-container {
-    max-height: 220px;
-    padding: 15px 10px;
-    overflow-y: hidden;
+    max-height: 200px;
+    padding: 15px;
+    overflow: hidden;
+    gap: 6px;
   }
 
   .lyric-line {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.5;
-    padding: 4px 0;
+    padding: 3px 0;
   }
 
   .lyric-line.active {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .controls-section {
@@ -920,19 +976,20 @@ const seekTo = (e) => {
   }
 
   .lyrics-container {
-    max-height: 160px;
-    padding: 12px 8px;
-    overflow-y: hidden;
+    max-height: 150px;
+    padding: 12px;
+    overflow: hidden;
+    gap: 5px;
   }
 
   .lyric-line {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.4;
-    padding: 3px 0;
+    padding: 2px 0;
   }
 
   .lyric-line.active {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .controls-section {
