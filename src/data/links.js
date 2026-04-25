@@ -3,6 +3,25 @@
 
 const categories = [
   {
+    id: 'speed',
+    name: '便捷链接',
+    icon: '⚡',
+    links: [
+      { id: 1001, title: "微信文件传输助手", link: "https://filehelper.weixin.qq.com/", desc: "使用文件传输助手，手机电脑轻松互传文件", icon: new URL('@/assets/icons/weixin.ico', import.meta.url).href },
+      { id: 1002, title: "VS Code", link: "https://code.visualstudio.com/download", desc: "点击跳转下载链接", icon: new URL('@/assets/icons/vscode.ico', import.meta.url).href },
+      { id: 1003, title: "Node.js", link: "https://nodejs.org/en/download", desc: "点击跳转下载链接", icon: new URL('@/assets/icons/node.png', import.meta.url).href },
+      { id: 1004, title: "Navicat 17", link: "https://www.navicat.com.cn/download/navicat-premium-lite", desc: "点击跳转下载链接", icon: new URL('@/assets/icons/Navicat.ico', import.meta.url).href },
+    ],
+  },
+
+  {
+    id: 'music',
+    name: '我喜欢的音乐',
+    icon: '🎵',
+    links: null,
+  },
+
+  {
     id: 'learning',
     name: '学习资源',
     icon: '📚',
@@ -44,8 +63,7 @@ const categories = [
       { id: 105, title: "Kimi", link: "https://www.kimi.com/zh/", desc: "长文本AI智能助手", icon: new URL('@/assets/icons/kimi.ico', import.meta.url).href },
       { id: 106, title: "Jitter", link: "https://jitter.video/", desc: "将LOGO变成动态效果", icon: new URL('@/assets/icons/jttr.webp', import.meta.url).href },
       { id: 107, title: "飞书 AI", link: "https://www.feishu.cn/", desc: "字节跳动旗下工作平台", icon: new URL('@/assets/icons/feishu.image', import.meta.url).href },
-      { id: 108, title: "美图设计室", link: "https://www.designkit.cn/", desc: "一键生成你想要的图片", icon: new URL('@/assets/icons/meitu.ico', import.meta.url).href },
-      { id: 109, title: "墨刀", link: "https://modao.cc/", desc: "AI生成可编辑原型图", icon: new URL('@/assets/icons/modao.ico', import.meta.url).href },
+      { id: 110, title: "Toolify", link: "https://www.toolify.ai/zh/", desc: "AI工具导航", icon: new URL('@/assets/icons/too.ico', import.meta.url).href },
     ]
   },
   {
@@ -92,63 +110,16 @@ const categories = [
     links: [
       { id: 401, title: "硬核指南", link: "https://yinghezhinan.com/", desc: "够高清才是真硬核~~~", icon: new URL('@/assets/icons/yh.webp', import.meta.url).href },
       { id: 402, title: "图欧导航", link: "https://tuostudy.upnb.top/", desc: "各种资源，等你去发现", icon: new URL('@/assets/icons/tuou.webp', import.meta.url).href },
-      { id: 403, title: "哔哩哔哩", link: "https://www.bilibili.com/", desc: "年轻人的视频社区", icon: "🔵" },
-      { id: 404, title: "知乎", link: "https://www.zhihu.com/", desc: "有问题，就会有答案", icon: "💬" },
-      { id: 405, title: "掘金", link: "https://juejin.cn/", desc: "助力每一位开发者成长", icon: "⛏️" },
-      { id: 406, title: "Stack Overflow", link: "https://stackoverflow.com/", desc: "全球最大的程序员问答社区", icon: "📊" },
-      { id: 407, title: "产品导航", link: "https://www.pmdaniu.com/", desc: "产品经理必备导航", icon: "📦" },
     ]
   },
   {
-    id: 'videos',
-    name: '视频网站',
-    icon: '🎬',
+    id: 'personality',
+    name: '人格测试',
+    icon: '🔎',
     links: [
-      { id: 501, title: "YouTube", link: "https://www.youtube.com/", desc: "全球最大的视频分享平台", icon: "🔴" },
-      { id: 502, title: "腾讯视频", link: "https://v.qq.com/", desc: "中国领先的在线视频媒体平台", icon: "🟢" },
-      { id: 503, title: "爱奇艺", link: "https://www.iqiyi.com/", desc: "海量高清视频在线观看", icon: "🟡" },
-    ]
+      { id: 501, title: "TRUMEE", link: "https://trumeelab.com/", desc: "真我实验室，做真实的自己", icon: new URL('@/assets/icons/zw.ico', import.meta.url).href },
+    ],
   },
-  {
-    id: 'music',
-    name: '音乐网站',
-    icon: '🎵',
-    links: [
-      { id: 601, title: "网易云音乐", link: "https://music.163.com/", desc: "发现好音乐，遇见对的人", icon: "🔴" },
-      { id: 602, title: "QQ音乐", link: "https://y.qq.com/", desc: "听我想听的歌", icon: "🟢" },
-      { id: 603, title: "Spotify", link: "https://www.spotify.com/", desc: "全球领先的音乐流媒体平台", icon: "🟢" },
-    ]
-  },
-  {
-    id: 'shopping',
-    name: '购物网站',
-    icon: '🛒',
-    links: [
-      { id: 701, title: "淘宝", link: "https://www.taobao.com/", desc: "淘！我喜欢", icon: "🟠" },
-      { id: 702, title: "京东", link: "https://www.jd.com/", desc: "多快好省，品质生活", icon: "🔴" },
-      { id: 703, title: "拼多多", link: "https://www.pinduoduo.com/", desc: "拼多，多实惠", icon: "🟠" },
-    ]
-  },
-  {
-    id: 'news',
-    name: '新闻资讯',
-    icon: '📰',
-    links: [
-      { id: 801, title: "知乎热榜", link: "https://www.zhihu.com/hot", desc: "发现更大的世界", icon: "💬" },
-      { id: 802, title: "微博热搜", link: "https://s.weibo.com/top/summary", desc: "随时随地发现新鲜事", icon: "🔴" },
-      { id: 803, title: "百度热搜", link: "https://top.baidu.com/", desc: "百度一下，你就知道", icon: "🔵" },
-    ]
-  },
-  {
-    id: 'design',
-    name: '设计资源',
-    icon: '🎨',
-    links: [
-      { id: 901, title: "站酷", link: "https://www.zcool.com.cn/", desc: "设计师互动平台", icon: "🔵" },
-      { id: 902, title: "Dribbble", link: "https://dribbble.com/", desc: "全球顶尖设计师社区", icon: "🔴" },
-      { id: 903, title: "Behance", link: "https://www.behance.net/", desc: "展示和发现创意作品", icon: "🔵" },
-    ]
-  }
 ]
 
 export default categories

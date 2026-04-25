@@ -15,7 +15,8 @@
         >
           <span class="nav-icon">{{ cat.icon }}</span>
           <span class="nav-name">{{ cat.name }}</span>
-          <span class="nav-count">{{ cat.links.length }}</span>
+          <span class="nav-count" v-if="cat.links">{{ cat.links.length }}</span>
+          <span class="nav-count" v-else-if="cat.id === 'music'">3</span>
         </div>
       </nav>
     </aside>
@@ -27,34 +28,40 @@
       @touchmove="handleTouchMove"
       @touchend="handleTouchEnd"
     >
-      <div class="content-header">
-        <h1>{{ currentCategory?.icon }} {{ currentCategory?.name }}</h1>
-        <p class="category-desc">共 {{ currentCategory?.links?.length || 0 }} 个链接</p>
-      </div>
+      <!-- 音乐播放器界面 -->
+      <MusicPlayer v-show="activeCategory === 'music'" />
+      
+      <!-- 正常链接界面 -->
+      <template v-if="activeCategory !== 'music'">
+        <div class="content-header">
+          <h1>{{ currentCategory?.icon }} {{ currentCategory?.name }}</h1>
+          <p class="category-desc">共 {{ currentCategory?.links?.length || 0 }} 个链接</p>
+        </div>
 
-      <div class="links-grid">
-        <a
-          v-for="link in currentCategory?.links"
-          :key="link.id"
-          :href="link.link"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="link-card"
-        >
-          <img v-if="link.icon" :src="link.icon" :alt="link.title" class="card-icon" loading="lazy" />
-          <div v-else class="card-icon">🔗</div>
-          <div class="card-content">
-            <h3 class="card-title">{{ link.title }}</h3>
-            <p class="card-desc">{{ link.desc }}</p>
-          </div>
-          <div class="card-arrow">➜</div>
-        </a>
-      </div>
+        <div class="links-grid">
+          <a
+            v-for="link in currentCategory?.links"
+            :key="link.id"
+            :href="link.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link-card"
+          >
+            <img v-if="link.icon" :src="link.icon" :alt="link.title" class="card-icon" loading="lazy" />
+            <div v-else class="card-icon">🔗</div>
+            <div class="card-content">
+              <h3 class="card-title">{{ link.title }}</h3>
+              <p class="card-desc">{{ link.desc }}</p>
+            </div>
+            <div class="card-arrow">➜</div>
+          </a>
+        </div>
 
-      <div v-if="!currentCategory?.links?.length" class="empty-state">
-        <div class="empty-icon">📭</div>
-        <p>该分类下暂无链接</p>
-      </div>
+        <div v-if="!currentCategory?.links?.length" class="empty-state">
+          <div class="empty-icon">📭</div>
+          <p>该分类下暂无链接</p>
+        </div>
+      </template>
     </main>
   </div>
 </template>
@@ -62,6 +69,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import categories from '../data/links.js'
+import MusicPlayer from './MusicPlayer.vue'
 
 const activeCategory = ref(categories[0].id)
 const isMobile = ref(false)
@@ -72,7 +80,15 @@ let touchStartX = 0
 let touchEndX = 0
 let hasMoved = false // 标记是否发生了滑动
 
+// 创建包含音乐分类的完整分类列表
+const allCategories = computed(() => {
+  return [...categories, { id: 'music', name: '我喜欢的音乐', icon: '🎵' }]
+})
+
 const currentCategory = computed(() => {
+  if (activeCategory.value === 'music') {
+    return { id: 'music', name: '我喜欢的音乐', icon: '🎵' }
+  }
   return categories.find(cat => cat.id === activeCategory.value)
 })
 
@@ -82,17 +98,17 @@ const switchCategory = (id) => {
 
 // 切换到上一个分类
 const switchToPrevCategory = () => {
-  const currentIndex = categories.findIndex(cat => cat.id === activeCategory.value)
+  const currentIndex = allCategories.value.findIndex(cat => cat.id === activeCategory.value)
   if (currentIndex > 0) {
-    activeCategory.value = categories[currentIndex - 1].id
+    activeCategory.value = allCategories.value[currentIndex - 1].id
   }
 }
 
 // 切换到下一个分类
 const switchToNextCategory = () => {
-  const currentIndex = categories.findIndex(cat => cat.id === activeCategory.value)
-  if (currentIndex < categories.length - 1) {
-    activeCategory.value = categories[currentIndex + 1].id
+  const currentIndex = allCategories.value.findIndex(cat => cat.id === activeCategory.value)
+  if (currentIndex < allCategories.value.length - 1) {
+    activeCategory.value = allCategories.value[currentIndex + 1].id
   }
 }
 
