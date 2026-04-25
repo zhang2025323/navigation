@@ -3,6 +3,12 @@
 
 const categories = [
   {
+    id: 'music',
+    name: '我喜欢的音乐',
+    icon: '🎵',
+    links: null,
+  },
+  {
     id: 'speed',
     name: '便捷链接',
     icon: '⚡',
@@ -13,14 +19,6 @@ const categories = [
       { id: 1004, title: "Navicat 17", link: "https://www.navicat.com.cn/download/navicat-premium-lite", desc: "点击跳转下载链接", icon: new URL('@/assets/icons/Navicat.ico', import.meta.url).href },
     ],
   },
-
-  {
-    id: 'music',
-    name: '我喜欢的音乐',
-    icon: '🎵',
-    links: null,
-  },
-
   {
     id: 'learning',
     name: '学习资源',

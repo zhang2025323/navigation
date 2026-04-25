@@ -1,22 +1,23 @@
-import aiyaaiyaLrc from '../assets/lyrics/BY2-爱丫爱丫.lrc?raw'
-import yfLrc from '../assets/lyrics/玉芬-你像风一样出现.lrc?raw'
+import aiyaaiyaLrc from '../assets/lyrics/BY2-爱丫爱丫.lrc'
+import yfLrc from '../assets/lyrics/玉芬-你像风一样出现.lrc'
+import jcxLrc from '../assets/lyrics/江辰-锈.lrc'
 
 export const musicList = [
   {
-    id: 1,
-    title: 'Wasted',
-    artist: 'huken&Murkish&harmony',
-    cover: new URL('../assets/images/w.jpg', import.meta.url).href,
-    audio: new URL('../assets/wasted.mp3', import.meta.url).href,
-    lyrics: '[00:00.00]歌名：Wasted\n[00:02.00]歌手：huken&Murkish&harmony\n[00:05.00]纯音乐，请欣赏\n'
+    id: 5,
+    title: '绣',
+    artist: '江辰',
+    cover: new URL('../assets/images/xiu.jpg', import.meta.url).href,
+    audio: new URL('../assets/江辰-锈.mp3', import.meta.url).href,
+    lyrics: jcxLrc
   },
   {
-    id: 2,
-    title: '时光若易碎瓷(Time is Broken)',
-    artist: 'ks泳',
-    cover: new URL('../assets/images/time.jpg', import.meta.url).href,
-    audio: new URL('../assets/Timeisbroken.mp3', import.meta.url).href,
-    lyrics: '[00:00.00]歌名：时光若易碎瓷(Time is Broken)\n[00:02.00]歌手：ks泳\n[00:05.00]纯音乐，请欣赏\n'
+    id: 4,
+    title: '你像风一样出现',
+    artist: '玉芬',
+    cover: new URL('../assets/images/yf.jpg', import.meta.url).href,
+    audio: new URL('../assets/玉芬-你像风一样出现.mp3', import.meta.url).href,
+    lyrics: yfLrc
   },
   {
     id: 3,
@@ -27,13 +28,21 @@ export const musicList = [
     lyrics: aiyaaiyaLrc
   },
   {
-    id: 4,
-    title: '你像风一样出现',
-    artist: '玉芬',
-    cover: new URL('../assets/images/yf.jpg', import.meta.url).href,
-    audio: new URL('../assets/玉芬-你像风一样出现.mp3', import.meta.url).href,
-    lyrics: yfLrc
-  }
+    id: 2,
+    title: '时光若易碎瓷(Time is Broken)',
+    artist: 'ks泳',
+    cover: new URL('../assets/images/time.jpg', import.meta.url).href,
+    audio: new URL('../assets/Timeisbroken.mp3', import.meta.url).href,
+    lyrics: '[00:00.00]歌名：时光若易碎瓷(Time is Broken)\n[00:02.00]歌手：ks泳\n[00:05.00]纯音乐，请欣赏\n'
+  },
+  {
+    id: 1,
+    title: 'Wasted',
+    artist: 'huken&Murkish&harmony',
+    cover: new URL('../assets/images/w.jpg', import.meta.url).href,
+    audio: new URL('../assets/wasted.mp3', import.meta.url).href,
+    lyrics: '[00:00.00]歌名：Wasted\n[00:02.00]歌手：huken&Murkish&harmony\n[00:05.00]纯音乐，请欣赏\n'
+  },
 ]
 
 /*

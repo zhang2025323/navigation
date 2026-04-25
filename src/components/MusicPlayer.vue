@@ -482,6 +482,7 @@ const seekTo = (e) => {
   justify-content: center;
   min-width: 0;
   overflow: hidden;
+  position: relative;
 }
 
 .lyrics-container {
@@ -498,41 +499,31 @@ const seekTo = (e) => {
   gap: 8px;
 }
 
-.lyrics-container::-webkit-scrollbar {
-  width: 4px;
-}
-
-.lyrics-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.lyrics-container::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 255, 0.3);
-  border-radius: 2px;
-}
-
 .lyric-line {
   text-align: center;
   color: rgba(255, 255, 255, 0.3);
   font-size: 16px;
   line-height: 1.6;
-  padding: 4px 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 4px 16px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   letter-spacing: 0.5px;
-  opacity: 0.5;
+  opacity: 0.4;
   white-space: nowrap;
+  transform: scale(0.95) translateY(5px);
+  filter: blur(0.5px);
 }
 
 .lyric-line.active {
   color: #00ffff;
   font-size: 20px;
   font-weight: 600;
-  text-shadow: 
-    0 0 25px rgba(0, 255, 255, 1),
-    0 0 50px rgba(0, 255, 255, 0.5),
-    0 0 75px rgba(0, 255, 255, 0.3);
   opacity: 1;
-  transform: scale(1.08);
+  transform: scale(1.08) translateY(0);
+  filter: blur(0);
+  text-shadow: 
+    0 0 20px rgba(0, 255, 255, 1),
+    0 0 40px rgba(0, 255, 255, 0.6),
+    0 0 60px rgba(0, 255, 255, 0.3);
 }
 
 /* 控制区域 */
@@ -885,6 +876,7 @@ const seekTo = (e) => {
     flex: 1;
     min-height: 0;
     overflow: hidden;
+    position: relative;
   }
 
   .lyrics-container {
@@ -897,11 +889,16 @@ const seekTo = (e) => {
   .lyric-line {
     font-size: 14px;
     line-height: 1.5;
-    padding: 3px 0;
+    padding: 3px 12px;
+    transform: scale(0.95) translateY(3px);
+    filter: blur(0.3px);
   }
 
   .lyric-line.active {
     font-size: 17px;
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+    filter: blur(0);
   }
 
   .controls-section {
@@ -985,11 +982,16 @@ const seekTo = (e) => {
   .lyric-line {
     font-size: 13px;
     line-height: 1.4;
-    padding: 2px 0;
+    padding: 2px 10px;
+    transform: scale(0.95) translateY(2px);
+    filter: blur(0.3px);
   }
 
   .lyric-line.active {
     font-size: 16px;
+    opacity: 1;
+    transform: scale(1.05) translateY(0);
+    filter: blur(0);
   }
 
   .controls-section {

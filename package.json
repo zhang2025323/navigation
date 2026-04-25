@@ -11,6 +11,7 @@
     "deploy": "gh-pages -d dist --no-history"
   },
   "dependencies": {
+    "iconv-lite": "^0.7.2",
     "vue": "^3.5.25"
   },
   "devDependencies": {
