@@ -122,12 +122,14 @@
       @timeupdate="updateTime"
       @loadedmetadata="updateDuration"
       @ended="playNext"
+      @play="handlePlay"
+      @pause="handlePause"
     />
   </div>
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick, watch } from 'vue'
 import { musicList } from '../data/music'
 
 const audioRef = ref(null)
@@ -179,13 +181,29 @@ const formatTime = (time) => {
   return `${minutes}:${seconds}`
 }
 
+// 重置歌词位置
+const resetLyricPosition = () => {
+  currentLyricIndex.value = 0
+  currentTime.value = 0
+  if (lyricsContainer.value) {
+    lyricsContainer.value.scrollTop = 0
+  }
+}
+
+// 监听歌曲切换，重置歌词位置
+watch(currentMusic, () => {
+  nextTick(() => {
+    resetLyricPosition()
+  })
+})
+
 // 更新播放时间和歌词
 const updateTime = () => {
   if (audioRef.value) {
     currentTime.value = audioRef.value.currentTime
     
-    // 找到当前播放的歌词
-    if (parsedLyrics.value.length > 0) {
+    // 只有在播放时才更新歌词
+    if (isPlaying.value && parsedLyrics.value.length > 0) {
       let index = 0
       for (let i = 0; i < parsedLyrics.value.length; i++) {
         if (parsedLyrics.value[i].time <= currentTime.value) {
@@ -233,23 +251,47 @@ const togglePlay = () => {
   if (!audioRef.value) return
   if (isPlaying.value) {
     audioRef.value.pause()
+    isPlaying.value = false
   } else {
     audioRef.value.play()
+      .then(() => {
+        isPlaying.value = true
+      })
+      .catch((err) => {
+        console.error('播放失败:', err)
+        isPlaying.value = false
+      })
   }
-  isPlaying.value = !isPlaying.value
+}
+
+// 音频播放事件 - 确保状态正确
+const handlePlay = () => {
+  isPlaying.value = true
+}
+
+const handlePause = () => {
+  isPlaying.value = false
 }
 
 // 播放某首歌
 const playSong = (index) => {
   currentIndex.value = index
-  currentLyricIndex.value = 0
-  isPlaying.value = true
   showSongList.value = false
   
   nextTick(() => {
     if (audioRef.value) {
+      // 先重置歌词位置
+      resetLyricPosition()
+      // 设置播放位置和播放
       audioRef.value.currentTime = 0
       audioRef.value.play()
+        .then(() => {
+          isPlaying.value = true
+        })
+        .catch((err) => {
+          console.error('播放失败:', err)
+          isPlaying.value = false
+        })
     }
   })
 }
