@@ -175,7 +175,7 @@ const closePasswordModal = () => {
 const switchToPrevCategory = () => {
   const currentIndex = allCategories.value.findIndex(cat => cat.id === activeCategory.value)
   if (currentIndex > 0) {
-    activeCategory.value = allCategories.value[currentIndex - 1].id
+    switchCategory(allCategories.value[currentIndex - 1].id)
   }
 }
 
@@ -183,7 +183,7 @@ const switchToPrevCategory = () => {
 const switchToNextCategory = () => {
   const currentIndex = allCategories.value.findIndex(cat => cat.id === activeCategory.value)
   if (currentIndex < allCategories.value.length - 1) {
-    activeCategory.value = allCategories.value[currentIndex + 1].id
+    switchCategory(allCategories.value[currentIndex + 1].id)
   }
 }
 

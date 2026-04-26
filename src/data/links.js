@@ -19,18 +19,7 @@ const categories = [
       { id: 1004, title: "Navicat 17", link: "https://www.navicat.com.cn/download/navicat-premium-lite", desc: "点击跳转下载链接", icon: new URL('@/assets/icons/Navicat.ico', import.meta.url).href },
     ],
   },
-  {
-    id: 'admin',
-    name: '站长专属',
-    icon: '🔐',
-    requirePassword: true,
-    links: [
-      { id: 601, title: "小皮面板", link: "http://8.156.84.27:38541/home", desc: "服务器管理面板", icon: "🖥️" },
-      { id: 602, title: "工业管理系统", link: "www.mes4.pw", desc: "mes4.0工业管理系统", icon: "🗄️" },
-      { id: 603, title: "社区云/管理后台", link: "https://share.streamlit.io/", desc: "用于管理Python创建的文件", icon: "📊" },
-      { id: 604, title: "智能工件质检系统", link: "https://isual-inspection.streamlit.app/", desc: "划痕+螺丝缺陷检测", icon: "📝" },
-    ],
-  },
+
   {
     id: 'learning',
     name: '学习资源',
@@ -128,6 +117,18 @@ const categories = [
     icon: '🔎',
     links: [
       { id: 501, title: "TRUMEE", link: "https://trumeelab.com/", desc: "真我实验室，做真实的自己", icon: new URL('@/assets/icons/zw.ico', import.meta.url).href },
+    ],
+  },
+  {
+    id: 'admin',
+    name: '站长专属',
+    icon: '🔐',
+    requirePassword: true,
+    links: [
+      { id: 601, title: "小皮面板", link: "http://8.156.84.27:38541/home", desc: "服务器管理面板", icon: "🖥️" },
+      { id: 602, title: "工业管理系统", link: "www.mes4.pw", desc: "mes4.0工业管理系统", icon: "🗄️" },
+      { id: 603, title: "社区云/管理后台", link: "https://share.streamlit.io/", desc: "用于管理Python创建的文件", icon: "📊" },
+      { id: 604, title: "智能工件质检系统", link: "https://isual-inspection.streamlit.app/", desc: "划痕+螺丝缺陷检测", icon: "📝" },
     ],
   },
 
