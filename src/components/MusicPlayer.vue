@@ -75,9 +75,17 @@
               <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
             </svg>
           </button>
-          <button @click="downloadCurrentSong" class="control-btn download-btn" title="下载歌曲">
-            <svg viewBox="0 0 24 24" fill="currentColor">
+          <button @click="downloadCurrentSong" class="control-btn download-btn" :class="{ downloading: isDownloading }" title="下载歌曲">
+            <svg class="download-icon" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+            <svg v-if="isDownloading" class="progress-ring" viewBox="0 0 44 44">
+              <circle class="progress-ring-bg" cx="22" cy="22" r="20"/>
+              <circle 
+                class="progress-ring-circle"
+                cx="22" cy="22" r="20"
+                :stroke-dasharray="`${downloadProgress * 125.6} 125.6`"
+              />
             </svg>
           </button>
         </div>
@@ -97,12 +105,13 @@
           <h3>歌曲列表</h3>
           <button @click="showSongList = false" class="close-btn">✕</button>
         </div>
-        <div class="song-list">
+        <div class="song-list" ref="songListRef">
           <div 
             v-for="(song, index) in musicList" 
             :key="song.id"
             class="song-item"
             :class="{ active: currentIndex === index }"
+            :ref="el => { if (currentIndex === index) currentSongItemRef = el }"
             @click="playSong(index)"
           >
             <div class="song-number">{{ index + 1 }}</div>
@@ -134,7 +143,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick, watch } from 'vue'
+import { ref, computed, nextTick, watch, onMounted } from 'vue'
 import { musicList } from '../data/music'
 
 const audioRef = ref(null)
@@ -144,7 +153,13 @@ const currentTime = ref(0)
 const duration = ref(0)
 const showSongList = ref(false)
 const currentLyricIndex = ref(0)
-const playMode = ref('normal') // normal: 顺序播放, loop: 单曲循环, shuffle: 随机播放
+const playMode = ref('normal')
+const songListRef = ref(null)
+const currentSongItemRef = ref(null)
+
+// 下载相关状态
+const isDownloading = ref(false)
+const downloadProgress = ref(0)
 
 const currentMusic = computed(() => musicList[currentIndex.value])
 
@@ -224,6 +239,26 @@ watch(currentMusic, () => {
   nextTick(() => {
     resetLyricPosition()
   })
+})
+
+// 打开歌曲列表时，自动滚动到当前播放的歌曲
+watch(showSongList, (newVal) => {
+  if (newVal) {
+    nextTick(() => {
+      if (currentSongItemRef.value && songListRef.value) {
+        currentSongItemRef.value.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        })
+      }
+    })
+  }
+})
+
+// 页面加载时随机播放一首歌
+onMounted(() => {
+  const randomIndex = Math.floor(Math.random() * musicList.length)
+  currentIndex.value = randomIndex
 })
 
 // 更新播放时间和歌词
@@ -378,9 +413,35 @@ const downloadCurrentSong = async () => {
   const song = currentMusic.value
   if (!song || !song.audio) return
   
+  isDownloading.value = true
+  downloadProgress.value = 0
+  
   try {
     const response = await fetch(song.audio)
-    const blob = await response.blob()
+    const contentLength = response.headers.get('content-length')
+    const total = parseInt(contentLength, 10)
+    let loaded = 0
+    
+    const reader = response.body.getReader()
+    const chunks = []
+    
+    while (true) {
+      const { done, value } = await reader.read()
+      
+      if (done) break
+      
+      chunks.push(value)
+      loaded += value.length
+      
+      if (total > 0) {
+        downloadProgress.value = Math.min(loaded / total, 0.99)
+      }
+    }
+    
+    downloadProgress.value = 1
+    
+    // 组合所有数据块
+    const blob = new Blob(chunks)
     
     // 创建临时链接并触发下载
     const url = window.URL.createObjectURL(blob)
@@ -394,9 +455,18 @@ const downloadCurrentSong = async () => {
     
     // 释放内存
     window.URL.revokeObjectURL(url)
+    
+    // 延迟重置状态，让用户看到100%
+    setTimeout(() => {
+      isDownloading.value = false
+      downloadProgress.value = 0
+    }, 800)
+    
   } catch (error) {
     console.error('下载失败:', error)
     alert('下载失败，请重试')
+    isDownloading.value = false
+    downloadProgress.value = 0
   }
 }
 
@@ -684,15 +754,51 @@ const seekTo = (e) => {
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
 }
 
+.download-btn {
+  position: relative;
+}
+
 .download-btn:hover {
   background: rgba(0, 200, 100, 0.15);
   border-color: rgba(0, 200, 100, 0.6);
   color: #00ff7f;
 }
 
-.download-btn svg {
+.download-btn.downloading {
+  pointer-events: none;
+}
+
+.download-icon {
   width: 85%;
   height: 85%;
+  transition: opacity 0.3s;
+}
+
+.download-btn.downloading .download-icon {
+  opacity: 0.5;
+}
+
+.progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 3;
+}
+
+.progress-ring-circle {
+  fill: none;
+  stroke: #00ff7f;
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.15s ease-out;
 }
 
 .play-btn {
@@ -984,13 +1090,12 @@ const seekTo = (e) => {
   .song-list-content {
     width: 95%;
     max-width: none;
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     max-height: 70vh;
-    border-radius: 20px 20px 0 0;
   }
 
   .song-list {
