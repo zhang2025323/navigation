@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>访问提示</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#121212;color:#fff;font-family:system-ui,-apple-system,sans-serif;padding:2rem 1rem;text-align:center}
+.container{max-width:380px;margin:0 auto}
+h2{font-size:20px;margin:1rem 0;color:#ff4444}
+.desc{color:#999;margin-bottom:1.8rem}
+.step{background:#1e1e1e;border-radius:12px;padding:1rem;margin:1rem 0;text-align:left}
+.step b{display:block;margin-bottom:6px;color:#fff}
+.step span{color:#aaa;font-size:14px}
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>⚠️ 微信内无法直接打开</h2>
+  <p class="desc">请在浏览器中打开以正常访问</p>
+
+  <div class="step">
+    <b>① 点击右上角 ···</b>
+    <span>打开微信右上角菜单</span>
+  </div>
+  <div class="step">
+    <b>② 选择「在浏览器打开」</b>
+    <span>Safari、手机浏览器均可</span>
+  </div>
+  <div class="step">
+    <b>③ 自动跳转到项目页面</b>
+    <span>打开后即可正常使用</span>
+  </div>
+</div>
+
+<script>
+function isWechat() {
+  return /micromessenger/i.test(navigator.userAgent)
+}
+if (!isWechat()) {
+  location.href = "https://zhang2025323.github.io/MyWeb/"
+}
+</script>
+</body>
+</html>
