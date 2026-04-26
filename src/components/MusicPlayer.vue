@@ -75,6 +75,11 @@
               <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
             </svg>
           </button>
+          <button @click="downloadCurrentSong" class="control-btn download-btn" title="下载歌曲">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+            </svg>
+          </button>
         </div>
 
         <button @click="showSongList = !showSongList" class="song-list-toggle">
@@ -358,7 +363,6 @@ const playNext = () => {
 
 const nextSong = () => {
   if (playMode.value === 'shuffle') {
-    // 随机播放一首新歌
     let randomIndex
     do {
       randomIndex = Math.floor(Math.random() * musicList.length)
@@ -366,6 +370,33 @@ const nextSong = () => {
     playSong(randomIndex)
   } else {
     playNext()
+  }
+}
+
+// 下载当前歌曲
+const downloadCurrentSong = async () => {
+  const song = currentMusic.value
+  if (!song || !song.audio) return
+  
+  try {
+    const response = await fetch(song.audio)
+    const blob = await response.blob()
+    
+    // 创建临时链接并触发下载
+    const url = window.URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${song.title} - ${song.artist}.mp3`
+    
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+    
+    // 释放内存
+    window.URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error('下载失败:', error)
+    alert('下载失败，请重试')
   }
 }
 
@@ -651,6 +682,17 @@ const seekTo = (e) => {
   border-color: rgba(0, 255, 255, 0.7);
   background: rgba(0, 255, 255, 0.1);
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.download-btn:hover {
+  background: rgba(0, 200, 100, 0.15);
+  border-color: rgba(0, 200, 100, 0.6);
+  color: #00ff7f;
+}
+
+.download-btn svg {
+  width: 85%;
+  height: 85%;
 }
 
 .play-btn {
