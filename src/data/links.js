@@ -126,8 +126,9 @@ const categories = [
     requirePassword: true,
     links: [
       { id: 601, title: "小皮面板", link: "http://8.156.84.27:38541/home", desc: "服务器管理面板", icon: new URL('@/assets/icons/xp.ico', import.meta.url).href },
-      { id: 602, title: "工业管理系统", link: "http://www.mes4.pw", desc: "mes4.0工业管理系统", icon: new URL('@/assets/icons/mes4.png', import.meta.url).href },
       { id: 603, title: "社区云/管理后台", link: "https://share.streamlit.io/", desc: "用于管理Python创建的文件", icon: new URL('@/assets/icons/ysq.svg', import.meta.url).href },
+      { id: 605, title: "云服务器管理控制台", link: "https://ecs.console.aliyun.com/server/i-2vcf43heeboe08190v2m/detail?regionId=cn-chengdu&serverLiteToken=1776416105179", desc: "阿里云服务器管理控制台", icon: new URL('@/assets/icons/alyglpt.ico', import.meta.url).href },
+      { id: 602, title: "工业管理系统", link: "http://www.mes4.pw", desc: "mes4.0工业管理系统", icon: new URL('@/assets/icons/mes4.png', import.meta.url).href },
       { id: 604, title: "智能工件质检系统", link: "https://isual-inspection.streamlit.app/", desc: "划痕+螺丝缺陷检测", icon: new URL('@/assets/icons/jc.png', import.meta.url).href },
     ],
   },
