@@ -107,7 +107,7 @@ const passwordInput = ref('')
 const passwordError = ref(false)
 const passwordInputRef = ref(null)
 const pendingCategoryId = ref(null)
-const ADMIN_PASSWORD = 'zhangwen2024301084'
+const ADMIN_PASSWORD = '666666'
 const isAuthenticated = ref(false)
 
 // 触摸状态
