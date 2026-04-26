@@ -16,7 +16,7 @@
           <span class="nav-icon">{{ cat.icon }}</span>
           <span class="nav-name">{{ cat.name }}</span>
           <span class="nav-count" v-if="cat.links">{{ cat.links.length }}</span>
-          <span class="nav-count" v-else-if="cat.id === 'music'">3</span>
+          <span class="nav-count music-count" v-else-if="cat.id === 'music'">{{ musicList.length }}</span>
         </div>
       </nav>
     </aside>
@@ -63,17 +63,52 @@
         </div>
       </template>
     </main>
+
+    <!-- 密码验证弹窗 -->
+    <div v-if="showPasswordModal" class="password-modal" @click.self="closePasswordModal">
+      <div class="password-modal-content">
+        <div class="password-header">
+          <h3>🔐 权限验证</h3>
+          <button @click="closePasswordModal" class="close-btn">✕</button>
+        </div>
+        <div class="password-body">
+          <p class="password-hint">此分类仅站长可用，请输入访问密码：</p>
+          <input
+            v-model="passwordInput"
+            type="password"
+            placeholder="请输入密码..."
+            class="password-input"
+            @keyup.enter="verifyPassword"
+            ref="passwordInputRef"
+          />
+          <p v-if="passwordError" class="password-error">❌ 密码错误，请重试</p>
+          <button @click="verifyPassword" class="password-submit-btn">
+            🔓 验证并进入
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 import categories from '../data/links.js'
+import { musicList } from '../data/music.js'
 import MusicPlayer from './MusicPlayer.vue'
 
 const activeCategory = ref(categories[0].id)
 const isMobile = ref(false)
 const navListRef = ref(null)
+
+// 密码相关状态
+const showPasswordModal = ref(false)
+const passwordInput = ref('')
+const passwordError = ref(false)
+const passwordInputRef = ref(null)
+const pendingCategoryId = ref(null)
+const ADMIN_PASSWORD = 'zhangwen2024301084'
+const isAuthenticated = ref(false)
 
 // 触摸状态
 let touchStartX = 0
@@ -93,7 +128,47 @@ const currentCategory = computed(() => {
 })
 
 const switchCategory = (id) => {
+  const category = categories.find(cat => cat.id === id)
+  
+  // 检查是否需要密码验证
+  if (category?.requirePassword && !isAuthenticated.value) {
+    pendingCategoryId.value = id
+    showPasswordModal.value = true
+    passwordError.value = false
+    passwordInput.value = ''
+    
+    // 自动聚焦输入框
+    nextTick(() => {
+      passwordInputRef.value?.focus()
+    })
+    return
+  }
+  
   activeCategory.value = id
+}
+
+// 验证密码
+const verifyPassword = () => {
+  if (!passwordInput.value) return
+  
+  if (passwordInput.value === ADMIN_PASSWORD) {
+    isAuthenticated.value = true
+    showPasswordModal.value = false
+    activeCategory.value = pendingCategoryId.value
+    passwordInput.value = ''
+    passwordError.value = false
+  } else {
+    passwordError.value = true
+    passwordInput.value = ''
+    passwordInputRef.value?.focus()
+  }
+}
+
+// 关闭密码弹窗
+const closePasswordModal = () => {
+  showPasswordModal.value = false
+  passwordInput.value = ''
+  passwordError.value = false
 }
 
 // 切换到上一个分类
@@ -286,6 +361,18 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
+.music-count {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.25), rgba(0, 200, 255, 0.15));
+  color: #00ffff;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
 /* 右侧内容区（可滚动） */
 .content-area {
   flex: 1;
@@ -406,6 +493,136 @@ onUnmounted(() => {
   color: rgba(255, 255, 255, 0.5);
   font-size: 16px;
   margin: 0;
+}
+
+/* 密码验证弹窗 */
+.password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.password-modal-content {
+  background: rgba(20, 25, 40, 0.98);
+  border: 1px solid rgba(0, 200, 100, 0.3);
+  border-radius: 16px;
+  padding: 30px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 200, 100, 0.1);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.password-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.password-header h3 {
+  font-size: 20px;
+  color: #00ff7f;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: all 0.2s;
+}
+
+.close-btn:hover {
+  color: #ff6b6b;
+  transform: scale(1.1);
+}
+
+.password-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.password-hint {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.password-input {
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(0, 200, 100, 0.3);
+  border-radius: 10px;
+  padding: 14px 18px;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.password-input:focus {
+  border-color: #00ff7f;
+  box-shadow: 0 0 20px rgba(0, 255, 127, 0.15);
+}
+
+.password-input::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.password-error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin: 0;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.password-submit-btn {
+  background: linear-gradient(135deg, #00ff7f, #00cc66);
+  color: #000;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.password-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 255, 127, 0.3);
 }
 
 /* 右侧内容区滚动条 */
